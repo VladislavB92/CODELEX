@@ -34,6 +34,7 @@ class RollTwoDice
             $this->rollDice();
             if ($this->score == $this->desired_sum) {
                 echo "\nYOU WON WITH $this->try THROWS!\n";
+                exit();
             }
         }
     }
@@ -43,7 +44,7 @@ class RollTwoDice
         echo "\nThrow $this->try";
         $this->dice1 = rand(1, 6);
         $this->dice2 = rand(1, 6);
-        $this->scoRre = $this->dice1 + $this->dice2;
+        $this->score = $this->dice1 + $this->dice2;
 
         echo "\n$this->dice1 and $this->dice2 is $this->score\n";
         return $this->score;
@@ -55,4 +56,4 @@ echo "\nWelcome to the dice game!\n";
 $game = new RollTwoDice();
 $game->calculateScore();
 
-// Can't make "using a Random object to generaterandom numbers from 1-6" :(
+// Can't makeusing a Random object to generaterandom numbers from 1-6

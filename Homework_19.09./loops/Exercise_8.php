@@ -22,5 +22,14 @@ class NumberSquare {
     public $max;
     public $output;
 
-    
+    function receiveInput() {
+        $this->min = readline("\nEnter minimal range: ");
+        $this->max = readline("\nEnter maximal range: ");
+        for ($i = $this->min; $i <= $this->max; $i++) {
+            echo $i;
+        }
+    }
 }
+
+$number_square = new NumberSquare();
+$number_square->receiveInput();
