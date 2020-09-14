@@ -1,3 +1,3 @@
 # CODELEX
 
-<h1>CODELEX PHP course work</h1>
+<h2>CODELEX PHP course work</h2>
