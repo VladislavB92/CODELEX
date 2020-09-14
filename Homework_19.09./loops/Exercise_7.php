@@ -50,7 +50,6 @@ class RollTwoDice
     }
 }
 
-
 echo "\nWelcome to the dice game!\n";
 
 $game = new RollTwoDice();
