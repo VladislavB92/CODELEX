@@ -43,16 +43,13 @@ class RollTwoDice
         echo "\nThrow $this->try";
         $this->dice1 = rand(1, 6);
         $this->dice2 = rand(1, 6);
-        $this->score = $this->dice1 + $this->dice2;
+        $this->scoRre = $this->dice1 + $this->dice2;
 
         echo "\n$this->dice1 and $this->dice2 is $this->score\n";
         return $this->score;
     }
-
-
-
-    
 }
+
 
 echo "\nWelcome to the dice game!\n";
 
