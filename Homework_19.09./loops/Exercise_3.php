@@ -15,7 +15,6 @@ turtle....................153
 This could be used as part of an index for a book. To print out the dots, use echo "." inside a loop body.
 */
 
-
 $frst_word = readline("\nEnter the first word: ");
 $scnd_word = readline("\nEnter the second word: ");
 $dot = "";

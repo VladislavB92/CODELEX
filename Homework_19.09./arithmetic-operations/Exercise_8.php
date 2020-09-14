@@ -22,28 +22,26 @@ Write a main method that calls this method for each of these employees:
         73 - hours worked
 */
 
-function calculateSalary($actual_hours, $hourly_wage, $name) {
-    
+function calculateSalary($actual_hours, $hourly_wage, $name)
+{
     $total_pay = 0.00;
     $extra_hours = 0;
 
     if ($actual_hours <= 40 && $hourly_wage >= 8.00) {
-        
+
         $total_pay = $actual_hours * $hourly_wage;
         echo "The $name have $actual_hours worked hours, 
         his hourly wage is $hourly_wage hours and got $$total_pay per week.\n";
-    } 
-    elseif ($actual_hours < 60 && $actual_hours > 40) {
-         
+    } elseif ($actual_hours < 60 && $actual_hours > 40) {
+
         $extra_hours = $actual_hours - 40;
         $total_pay = 40 * $hourly_wage + ($extra_hours * $hourly_wage * 1.5);
         echo "The $name have $actual_hours worked hours, 
         his hourly wage is $hourly_wage hours and gets $$total_pay per week.\n";
-    } 
-    elseif ($actual_hours > 60 || $hourly_wage < 8.00) {
-        
+    } elseif ($actual_hours > 60 || $hourly_wage < 8.00) {
+
         echo "The $name got an error!\n";
-    } 
+    }
 }
 
 $employee1 = new stdClass();
@@ -63,13 +61,14 @@ $employee3->hours_worked = 73;
 
 $employees = [$employee1, $employee2, $employee3];
 
-function calculateForEveryone($employee) {
+function calculateForEveryone($employee)
+{
     $wage = $employee->hourly_wage;
     $hours = $employee->hours_worked;
     $name = $employee->name;
     calculateSalary($hours, $wage, $name);
 }
 
-foreach($employees as $employee) {
-   calculateForEveryone($employee);
+foreach ($employees as $employee) {
+    calculateForEveryone($employee);
 }

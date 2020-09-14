@@ -56,10 +56,10 @@ if (($handle = fopen($file_name, "r")) !== FALSE) {
 
         $person_data_arr[] = $person_data;
         // And store into an array.
-}
+    }
 
-fclose($handle);
-// Close an open file pointer.
+    fclose($handle);
+    // Close an open file pointer.
 }
 
 $person_object = new stdClass();
@@ -79,21 +79,21 @@ $rows = array_map('str_getcsv', file('files/user_base.csv'));
 
 $header = array_shift($rows);
 $csv = [];
-foreach($rows as $row) {
+foreach ($rows as $row) {
     $csv[] = array_combine($header, $row);
 }
 // Turns csv data into an associative array.
 
 //print_r($csv);
 
-function findUser($database, $id) {
-
+function findUser($database, $id)
+{
     foreach ($database as $person) {
-    if ($person["ID"] === $id) {
-        // If "ID" exists in $csv...
-        return $person;
-    }  
-}
+        if ($person["ID"] === $id) {
+            // If "ID" exists in $csv...
+            return $person;
+        }
+    }
     return "ID was not found!";
 }
 

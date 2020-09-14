@@ -54,3 +54,5 @@ echo "\nWelcome to the dice game!\n";
 
 $game = new RollTwoDice();
 $game->calculateScore();
+
+// Can't make "using a Random object to generaterandom numbers from 1-6" :(

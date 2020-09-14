@@ -29,9 +29,10 @@ Next write a program to test the class,
 which displays the following menu and responds to the user’s selection:
 */
 
-class Geometry {
-
-    static function getCircleArea($circ_radius){
+class Geometry
+{
+    static function getCircleArea($circ_radius)
+    {
         if ($circ_radius > 0) {
             $circle_area = pi() * $circ_radius * 2;
             echo "\nThe AREA of the circle is " . round($circle_area, 2) . PHP_EOL;
@@ -40,16 +41,18 @@ class Geometry {
         }
     }
 
-    static function getRectangleArea($rec_length, $rec_width) {
+    static function getRectangleArea($rec_length, $rec_width)
+    {
         if ($rec_length > 0 && $rec_width > 0) {
             $rectangle_area = $rec_length * $rec_width;
             echo "\nThe AREA of the triangle is " . round($rectangle_area, 2) . PHP_EOL;
         } else {
             echo "\nError! Input can't be negative!\n";
-        }   
+        }
     }
 
-    static function getTriangleArea($tr_bs_length, $tr_height) {
+    static function getTriangleArea($tr_bs_length, $tr_height)
+    {
         if ($tr_bs_length > 0 && $tr_height > 0) {
             $triangle_area = $tr_bs_length * $tr_height * 0.5;
             echo "\nThe AREA of the triangle is " . round($triangle_area) . PHP_EOL;
@@ -77,31 +80,27 @@ while ($answer != "1" || $answer != "2" || $answer != "3" || $answer != "4") {
     if ($show_options) {
         echo $options;
     }
-    
+
     $answer = readline("\nI choose: ");
 
     if ($answer == "1") {
         $crc_rad = readline("Enter the RADIUS of a circle: ");
         $geometry_calculator->getCircleArea($crc_rad);
         $show_options = true;
-
-}   elseif ($answer == "2") {
+    } elseif ($answer == "2") {
         $rec_lngth = readline("Enter the LENGTH of the rectangle: ");
         $rec_wdth = readline("\nEnter the WIDTH of the rectangle: ");
         $geometry_calculator->getRectangleArea($rec_lngth, $rec_wdth);
         $show_options = true;
-
-}   elseif ($answer == "3") {
+    } elseif ($answer == "3") {
         $tr_bs_lngth = readline("Enter the BASE LENGTH of the triangle: ");
         $tr_hght = readline("\nEnter the HEIGHT of the triangle: ");
         $geometry_calculator->getTriangleArea($tr_bs_lngth, $tr_hght);
         $show_options = true;
-
-}   elseif ($answer == "4") {
+    } elseif ($answer == "4") {
         exit("Bye!\n");
         $show_options = false;
-
-}   else {
+    } else {
         echo "Error! This option does not exist!\n";
         $show_options = true;
     }

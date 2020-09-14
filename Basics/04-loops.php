@@ -60,7 +60,7 @@ Using loop (by your choice) print out every persons personal data. */
 
 $hollywood = [
     [
-        "name" => "Arnold", 
+        "name" => "Arnold",
         "surname" => "Schwarzeneger",
         "age" => 70,
         "birthday" => "09.03.1948."
@@ -76,10 +76,9 @@ $hollywood = [
         "surname" => "Stallone",
         "age" => 73,
         "birthday" => "30.06.1945."
-    ] 
+    ]
 ];
 
 for ($i = 0; $i < count($hollywood); $i++) {
     print_r($hollywood[$i]) . PHP_EOL;
 }
-

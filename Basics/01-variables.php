@@ -33,5 +33,3 @@ $my_age = 28;
 echo "$my_name $my_sur, $my_age";
 // Alternate: echo $my_name . " " . $my_sur . ", age: " . $my_age;
 // In case of double qoutes " " it is possible to enter variables directly in them.
-
-

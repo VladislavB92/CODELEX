@@ -18,7 +18,8 @@ $imperial_weight = "pounds";
 $imperial_height = "inches";
 $metric_or_imperial = "";
 
-function printAdvice ($bmi) {
+function printAdvice($bmi)
+{
     if ($bmi > 25) {
         echo "You are overweight! Eat less and no beers on Friday for you for now!\n";
     } elseif ($bmi < 25 && $bmi > 18.5) {
@@ -29,26 +30,24 @@ function printAdvice ($bmi) {
 }
 
 while ($metric_or_imperial != "m" || $metric_or_imperial != "i") {
-    
+
     $metric_or_imperial = readline("Please, choose your measurement unit. Metric or imperial: (type 'm' or 'i')\n");
 
     if ($metric_or_imperial == "m") {
-    $mass = readline("Enter your weight in $metric_weight: ");
-    $height = readline("\nEnter your height in $metric_height: ");
-    $bmi = ($mass / ($height * $height));
-    echo "Your BMI is " . round($bmi, 2) . PHP_EOL;
-    printAdvice($bmi);
-    exit("Bye!\n");
-
-} elseif ($metric_or_imperial == "i") {
-    $mass = readline("Enter your weight in $imperial_weight: ");
-    $height = readline("\nEnter your height in $imperial_height: ");
-    $bmi = ($mass / ($height * $height)) * 703;
-    echo "Your BMI is " . round($bmi, 2) . PHP_EOL;
-    printAdvice($bmi);
-    exit("Bye!\n");
-
-} else {
-    echo "Invalid input. Try again.\n";
-}
+        $mass = readline("Enter your weight in $metric_weight: ");
+        $height = readline("\nEnter your height in $metric_height: ");
+        $bmi = ($mass / ($height * $height));
+        echo "Your BMI is " . round($bmi, 2) . PHP_EOL;
+        printAdvice($bmi);
+        exit("Bye!\n");
+    } elseif ($metric_or_imperial == "i") {
+        $mass = readline("Enter your weight in $imperial_weight: ");
+        $height = readline("\nEnter your height in $imperial_height: ");
+        $bmi = ($mass / ($height * $height)) * 703;
+        echo "Your BMI is " . round($bmi, 2) . PHP_EOL;
+        printAdvice($bmi);
+        exit("Bye!\n");
+    } else {
+        echo "Invalid input. Try again.\n";
+    }
 }

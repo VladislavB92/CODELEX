@@ -11,7 +11,7 @@ while ($num != "exit") {
     $num = readline("\nEnter you number or type 'exit': ");
     $num_as_int = (int) $num;
     $num_str_len = strlen($num);
-    
+
     if ($num_as_int > 0) {
         echo "Your number contain of $num_str_len digits.\n";
     } elseif ($num_as_int < 0) {

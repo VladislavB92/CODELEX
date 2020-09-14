@@ -11,7 +11,8 @@ echo "\n--------Exercise 1-----------------------\n";
 and returns the same value with added "codelex" by the end of it.
 Print this value out. */
 
-function prntStr($str) {
+function prntStr($str)
+{
     return $str . "codelex" . PHP_EOL;
 
     //! If there is no "return in function, the output is "void".
@@ -26,7 +27,8 @@ First argument is a base value
 and the second one is a value its been multiplied by.
 For example, given argument 10 and 5 prints out 50 */
 
-function multiplyThis($int1, $int2) {
+function multiplyThis($int1, $int2)
+{
     return $int1 * $int2 . PHP_EOL;
 }
 echo multiplyThis(6, 9);
@@ -43,7 +45,8 @@ $person->name = "Scnitzel";
 $person->surname = "Puff";
 $person->age = 69;
 
-function isHeLegalAge($p) {
+function isHeLegalAge($p)
+{
     if ($p->age >= 18) {
         return "You can drink and drive." . PHP_EOL;
     } else {
@@ -75,17 +78,18 @@ $people[] = $arnold;
 $people[] = $pamela;
 $people[] = $bobby;
 
-function arePeopleLegalAge($p) {
+function arePeopleLegalAge($p)
+{
 
-        foreach ((array) $p as $people) {
-            foreach ((array) $people->age as $age) {
-                if ($age >= 18) {
-                    echo "You can drink and drive, $people->name." . PHP_EOL;
-                } else {
-                    echo "Go back to mommy, $people->name!" . PHP_EOL;
-                }
+    foreach ((array) $p as $people) {
+        foreach ((array) $people->age as $age) {
+            if ($age >= 18) {
+                echo "You can drink and drive, $people->name." . PHP_EOL;
+            } else {
+                echo "Go back to mommy, $people->name!" . PHP_EOL;
             }
         }
+    }
 }
 
 echo arePeopleLegalAge($people);
@@ -102,19 +106,19 @@ and how much it would cost to ship this product. */
 
 $fruits = [
     [
-        "fruit" => "apples", 
+        "fruit" => "apples",
         "weight" => 4
     ],
     [
-        "fruit" => "oranges", 
+        "fruit" => "oranges",
         "weight" => 11
     ],
     [
-        "fruit" => "grapes", 
+        "fruit" => "grapes",
         "weight" => 5
     ],
     [
-        "fruit" => "kiwis", 
+        "fruit" => "kiwis",
         "weight" => 15
     ],
 ];
@@ -128,24 +132,24 @@ $cost_per_kg = [
     ]
 ];
 
-function isOverTenKilos($f, $shipping) {
-    
+function isOverTenKilos($f, $shipping)
+{
+
     foreach ((array) $f as $fruit) {
-        
+
         foreach ((array) $fruit["weight"] as $weight) {
-            
+
             if ($weight > 10) {
-                echo "Your parcel with " . $fruit["fruit"] . 
-                " weighs " . $fruit["weight"] . " kilograms and " . 
-                $shipping[1]["more than 10 kg"] . "." . PHP_EOL;
-        
+                echo "Your parcel with " . $fruit["fruit"] .
+                    " weighs " . $fruit["weight"] . " kilograms and " .
+                    $shipping[1]["more than 10 kg"] . "." . PHP_EOL;
             } else {
-            echo "Your parcel with " . $fruit["fruit"] . 
-            " weighs " . $fruit["weight"] . " kilograms and "  . 
-            $shipping[0]["less than 10 kg"] . "." . PHP_EOL;
+                echo "Your parcel with " . $fruit["fruit"] .
+                    " weighs " . $fruit["weight"] . " kilograms and "  .
+                    $shipping[0]["less than 10 kg"] . "." . PHP_EOL;
+            }
         }
     }
-}   
 }
 
 isOverTenKilos($fruits, $cost_per_kg);
@@ -162,9 +166,10 @@ print out the double of the number value (using your custom function). */
 
 $ex6_array = [69, 420, 3.14, "codelex"];
 
-function doubleInt($int) {
+function doubleInt($int)
+{
     if (gettype($int) == "integer") {
-       echo "$int times 2 is " . $int * 2 . PHP_EOL;
+        echo "$int times 2 is " . $int * 2 . PHP_EOL;
     }
 }
 
@@ -212,16 +217,18 @@ $guns[] = $nineMm;
 
 // Array filter as an optional built function.
 
-function canBuy($requester, $store) {
+function canBuy($requester, $store)
+{
     foreach ($store as $gun) {
-        if ($requester->cash_usd >= $gun->price_usd &&
-        $requester->licence[0] == $gun->licence) {
+        if (
+            $requester->cash_usd >= $gun->price_usd &&
+            $requester->licence[0] == $gun->licence
+        ) {
             echo "Yes, you can buy this $gun->name, gringo!" . PHP_EOL;
         } else {
             echo "No $gun->name for you, pal!" . PHP_EOL;
         }
     }
-} 
+}
 
 canBuy($person, $guns);
-

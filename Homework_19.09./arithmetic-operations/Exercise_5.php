@@ -23,4 +23,4 @@ while ($secret_number != $player_guess) {
         echo "\nToo low! It was $secret_number! Bye, looser!" . PHP_EOL;
         exit();
     }
-} 
+}

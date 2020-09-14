@@ -30,7 +30,7 @@ class AsciiFigure
 {
 
     public const SIZE = 0;
-    public $asterix_count = 8; 
+    public $asterix_count = 8;
     // The second line of always will be 8 asterixes.
 
     function renderLines($s)

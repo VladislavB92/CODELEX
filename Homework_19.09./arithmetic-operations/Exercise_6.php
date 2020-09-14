@@ -1,6 +1,6 @@
 <?php
 
-include ("files/coza-loza-woza.php");
+include("files/coza-loza-woza.php");
 
 // Exercise #6
 /* Write a program called coza-loza-woza.php 

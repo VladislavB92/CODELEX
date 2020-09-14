@@ -13,19 +13,17 @@ $try_count = intval(readline("How many times the computer can try? : "));
 
 while ($your_number !== $pc_guess && $try_count > 0) {
     $pc_guess = rand($min_range, $max_range);
-    
-    echo "\nTry: $try_count | Your number is $your_number | Computer says $pc_guess";
-    
-    $try_count--;
-    
-    if ($your_number == $pc_guess){
-        echo "\nCOMPUTER GUESSED!\n";
-    break;
 
+    echo "\nTry: $try_count | Your number is $your_number | Computer says $pc_guess";
+
+    $try_count--;
+
+    if ($your_number == $pc_guess) {
+        echo "\nCOMPUTER GUESSED!\n";
+        break;
     } elseif ($try_count == 0) {
         echo "\nOUT OF TRIES! COMPUTER LOST!\n";
-    }
-    else {
+    } else {
         echo "\nComputer failed and will try again.\n";
-    } 
+    }
 }

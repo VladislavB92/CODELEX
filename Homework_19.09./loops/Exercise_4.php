@@ -44,4 +44,4 @@ class FizzBuzz
 echo "\n---- Welcome to FizzBuzz! ----\n";
 $limit_input = readline("\nEnter the limit of FizzBuzz: ");
 $fizzBuzz1 = new FizzBuzz($limit_input);
-echo $fizzBuzz1->printNumbers() . PHP_EOL; 
+echo $fizzBuzz1->printNumbers() . PHP_EOL;

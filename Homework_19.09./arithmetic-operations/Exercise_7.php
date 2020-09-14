@@ -16,7 +16,7 @@ $position_initial = 0;
 
 // x(10) = 0.5 * -9.81 * 10^2 + 0 * 10 + 0
 
-$position_in_meters = 0.5 * $acceleration * pow($time, 2) 
-+ $velocity_initial * $time + $position_initial;
+$position_in_meters = 0.5 * $acceleration * pow($time, 2)
+    + $velocity_initial * $time + $position_initial;
 
 echo $position_in_meters . PHP_EOL;

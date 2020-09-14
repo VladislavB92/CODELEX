@@ -16,15 +16,15 @@ $numbers = range(1, 110);
 
 foreach ($numbers as $number) {
 
-    if($number % 3 == 0) {
+    if ($number % 3 == 0) {
         echo " Coza";
     }
     if ($number % 5 == 0) {
         echo " Loza";
-    } 
+    }
     if ($number % 7 == 0) {
         echo " Woza";
-    } 
+    }
     if ($number % 3 != 0 && $number % 5 != 0 && $number % 5 != 0) {
         echo " $i";
     }

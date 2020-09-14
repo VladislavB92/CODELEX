@@ -96,11 +96,11 @@ $number = 69;
 switch ($number) {
     case $number < 50:
         echo "low";
-    break;
+        break;
     case $number > 50 && $number < 100:
         echo "medium";
-    break;
+        break;
     case $number > 100:
         echo "high";
-    break;
+        break;
 }
