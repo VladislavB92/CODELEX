@@ -34,7 +34,7 @@ class Geometry
     static function getCircleArea($circ_radius)
     {
         if ($circ_radius > 0) {
-            $circle_area = pi() * $circ_radius * 2;
+            $circle_area = pi() * pow($circ_radius, 2);
             echo "\nThe AREA of the circle is " . round($circle_area, 2) . PHP_EOL;
         } else {
             echo "\nError! Input can't be negative!\n";

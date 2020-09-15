@@ -17,16 +17,29 @@ Max? 5
 51234
 */
 
-class NumberSquare {
+class NumberSquare
+{
     public $min;
     public $max;
-    public $output;
 
-    function receiveInput() {
+    function receiveInput()
+    {
         $this->min = readline("\nEnter minimal range: ");
         $this->max = readline("\nEnter maximal range: ");
-        for ($i = $this->min; $i <= $this->max; $i++) {
-            echo $i;
+
+        for ($i = 0; $i <= $this->max - 1; $i++) {
+            // While $i is less or equal than 5
+
+            for ($numbers = $this->min; $numbers <= $this->min + $this->max - 1; $numbers++) {
+
+                if ($numbers <= $this->max) {
+                    echo $numbers;
+                } elseif ($numbers > $this->max) {
+                    echo ($numbers - $this->max);
+                }
+            }
+            echo "\n";
+            $this->min++;
         }
     }
 }
