@@ -24,10 +24,12 @@ You'll use a two-dimensional array of chars.
 
 The game is a tie.
 */
+
 $player1_sign = "";
 $row = "";
 $column = "";
-$winner = "";
+$winner = false;
+$turn = 1;
 
 $board = [
 
@@ -36,7 +38,8 @@ $board = [
     [" ", " ", " "],
 ];
 
-function display_board($board)
+// rendering game board
+function displayBoard($board)
 {
     echo "\n";
     echo " " . $board[0][0] . " | " . $board[0][1] . " | " . $board[0][2] .  "\n";
@@ -47,9 +50,10 @@ function display_board($board)
     echo "\n";
 }
 
+// Head of program
 echo "\n====WELCOME TO TIC-TAC-TOE====\n";
 echo "\nThis is your game board.\n";
-display_board($board);
+displayBoard($board);
 echo "\n--Gameplay mechanics--\n1. Before the start, both players choose desired sign: X or 0 (zero)";
 echo "\n2. When asked, write row number from 1 - 3\n";
 echo "3. Choose column number from 1 - 3\n";
@@ -57,7 +61,7 @@ echo "4. Press ENTER\n";
 echo "5. The player who first will fill up a row, a line or a diagonal will win\n";
 echo "\n-!Let's begin!-\n";
 
-// Choosing signs
+// Choosing signs for each player
 while ($player1_sign != "X" || $player1_sign != "0") {
 
     $player1_sign = readline("\nChoose your sign (X or 0) and press ENTER:   ");
@@ -66,30 +70,33 @@ while ($player1_sign != "X" || $player1_sign != "0") {
 
     if ($player1_sign == "X") {
         $player2_sign = "0";
-        echo "Player 1 chooses --> X\n";
+
+        echo "Player 1 chooses X\n";
         echo "Player 2 plays as 0\n";
         break;
     } elseif ($player1_sign == "0") {
         $player2_sign = "X";
+
         echo "Player 1 chooses 0\n";
         echo "Player 2 plays as X\n";
         break;
     } else {
         echo "Wrong sign! Choose X or 0 !\n";
     }
-
     echo "\n";
 }
 $active_player = $player1_sign;
-
 // Entering the coordinates
-while ($winner != true) {
 
+while ($winner == false || $turn <= 10) {
+
+    echo "\nTurn $turn";
     echo "\n*** Player with $active_player, choose your position ***";
     echo "\n";
 
-    display_board($board);
+    displayBoard($board);
 
+    // Promts to enter the location of input sign.
     // Substracts -1 from logical input to correspondent to array indexes.
     echo "Enter the row: ";
     $row = readline() - 1;
@@ -98,56 +105,68 @@ while ($winner != true) {
     $column = readline() - 1;
 
     // Determines, if the input of location is in range of array.
-    if ($row > 3 || $column > 3) {
+    // And places the sign in array.
+    if ($row <= 3 || $column <= 3) {
+        $board[$row][$column] = $active_player;
+    } elseif ($row > 3 || $column > 3) {
         echo "\nWRONG POSITION!\nYou lost your move!\n";
     }
 
-    if ($row <= 3 || $column <= 3) {
-        $board[$row][$column] = $active_player;
-        // Check winner
-        if (
-            // Check rows
-            $active_player == $board[0][0] &&
-            $active_player == $board[0][1] &&
-            $active_player == $board[0][2] ||
-            $active_player == $board[1][0] &&
-            $active_player == $board[1][1] &&
-            $active_player == $board[1][2] ||
-            $active_player == $board[2][0] &&
-            $active_player == $board[2][1] &&
-            $active_player == $board[2][2] ||
+    // Check winner logic (messy, I know).
+    if (
+        // Check rows
+        $board[0][0] == $active_player &&
+        $board[0][1] == $active_player &&
+        $board[0][2] == $active_player ||
+        $board[1][0] == $active_player &&
+        $board[1][1] == $active_player &&
+        $board[1][2] == $active_player ||
+        $board[2][0] == $active_player &&
+        $board[2][1] == $active_player &&
+        $board[2][2] == $active_player ||
 
-            // Check columns
-            $active_player == $board[0][0] &&
-            $active_player == $board[1][0] &&
-            $active_player == $board[2][0] ||
-            $active_player == $board[0][1] &&
-            $active_player == $board[1][1] &&
-            $active_player == $board[2][1] ||
-            $active_player == $board[0][2] &&
-            $active_player == $board[1][2] &&
-            $active_player == $board[2][2] ||
+        // Check columns
+        $board[0][0] == $active_player &&
+        $board[1][0] == $active_player &&
+        $board[2][0] == $active_player ||
+        $board[0][1] == $active_player &&
+        $board[1][1] == $active_player &&
+        $board[2][1] == $active_player ||
+        $board[0][2] == $active_player &&
+        $board[1][2] == $active_player &&
+        $board[2][2] == $active_player ||
 
-            // Check diagonals
-            $active_player == $board[1][1] &&
-            $board[1][1] == $board[2][2] ||
-            $active_player == $board[1][1] &&
-            $board[1][1] == $board[2][0]
+        // Check diagonals
+        $board[0][0] == $active_player &&
+        $board[1][1] == $active_player &&
+        $board[2][2] == $active_player ||
+        $board[0][2] == $active_player &&
+        $board[1][1] == $active_player &&
+        $board[2][0] == $active_player
+    ) {
+        //Determines the winner.
+        $winner == $active_player;
+        echo "\nCongratulations! The winner is Player with $active_player\n";
+        displayBoard($board);
+        $winner = true;
+        break;
+    } elseif ($turn == 9) {
+        // Determins the tie.
+        echo "\n";
+        displayBoard($board);
+        echo "\nIt's a tie!\n";
+        break;
+    } else {
+        // If no winners or tie, count round.
+        $turn++;
+    }
 
-        ) {
-            $winner == $active_player;
-            echo "\nCongratulations! The winner is Player with $active_player\n";
-            display_board($board);
-            $winner = true;
-        }
-
-        // Change turns
-        if ($active_player == $player1_sign) {
-            $active_player = $player2_sign;
-            echo "\n";
-        } elseif ($active_player == $player2_sign) {
-            echo "\n";
-            $active_player = $player1_sign;
-        }
+    // Change turns (signs) after each round.
+    if ($active_player == $player1_sign) {
+        $active_player = $player2_sign;
+        echo "\n";
+    } elseif ($active_player == $player2_sign) {
+        echo "\n";
+        $active_player = $player1_sign;
     }
 }
