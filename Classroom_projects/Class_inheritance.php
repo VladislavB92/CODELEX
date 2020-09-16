@@ -7,7 +7,6 @@ Child klasē unikāls traits.
 Kā noteikt, kura tā marka ir?
  */
 
-
 class Car
 {
     public $name;
