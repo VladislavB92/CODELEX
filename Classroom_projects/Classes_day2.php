@@ -24,22 +24,32 @@
 
 class Car
 {
-    private string $make;
-    private string $licencePlate;
-    private float $maxGasTank = 50.0;
-    private int $pinCode;
-    private float  $fuelConsumption;
+    private int $uniqueID;
+    private string $make; // Brand
+    private string $licencePlate; // Latvian standard
+    private int $pinCode; // 3-digit code
+    private float $fuelConsumption; // litres/10km
+    private float $maxGasTank = 50.0; // litres
+    private float $totalMileage = 0; // kilometres
+    private float $actualMileage;
 
     public function __construct(
+        int $uniqueID,
         string $make,
         string $licencePlate,
         int $pinCode,
         float $fuelConsumption
     ) {
+        $this->uniqueID = $uniqueID;
         $this->make = $make;
         $this->licencePlate = $licencePlate;
         $this->pinCode = $pinCode;
         $this->fuelConsumption = $fuelConsumption;
+    }
+
+    public function getUniqueId(): int
+    {
+        return $this->uniqueID;
     }
 
     public function getMake(): string
@@ -52,60 +62,135 @@ class Car
         return $this->licencePlate;
     }
 
+    public function getPincode(): int
+    {
+        return $this->pinCode;
+    }
+
     public function getMaxGasTank(): float
     {
-        return round($this->maxGasTank, 2);
+        return $this->maxGasTank;
+    }
+
+
+    public function getTotalMileage(): float
+    {
+        return $this->totalMileage;
     }
 
     public function driveCar(): void
     {
         $this->maxGasTank -= $this->fuelConsumption;
     }
-    public function getPincode(): int
+
+    public function addTotalMileage()
     {
-        return $this->pinCode;
+        $this->totalMileage += 10;
+    }
+
+    public function refuelGas(int $litres): void
+    {
+        $this->maxGasTank += $litres;
     }
 }
 
+// Car initialization
 $cars = [
-    $bugatti = new Car("Bugatti", "LV-7777", 3456, 2.0),
-    $lambo = new Car("Lamborghini", "LT-69", 1234, 1.5),
-    $lada = new Car("LADA NIVA", "PS-356", 9876, 0.7),
+    $bugatti = new Car(1, "Bugatti Veyron", "LV-7777", 345, 2.1),
+    $lambo = new Car(2, "Lamborghini Diablo", "LT-69", 123, 1.5),
+    $lada = new Car(3, "LADA NIVA", "PS-356", 987, 0.7),
 ];
 
-$distance = 10;
-$carMilage = 0;
-
 echo "\nWELCOME TO OUR GARAGE!\n";
-echo "Choose your car:\n";
-echo "Bugatti\n";
-echo "Lamborghini\n";
-echo "LADA NIVA\n";
+echo "\nWe have folowing cars for today's ride:\n";
 
-foreach ($cars as $selectedCar) {
+$driveFinished = false;
 
-    $choosenCar = readline("Choose your car: ");
-    $enteredPincode = readline("Enter pin-code: ");
+while ($driveFinished === false) {
 
-    if ($choosenCar == $selectedCar->getMake()) {
+    foreach ($cars as $car) {
+        echo "\nCar ID " . $car->getUniqueID();
+        echo "\nModel: " . $car->getMake() . PHP_EOL;
+        echo "License plate: " . $car->getLicencePlate() . PHP_EOL;
+        echo "Car totalMileage: " . $car->getTotalMileage() . PHP_EOL;
+    }
 
-        if ($selectedCar->getPincode() === intval($enteredPincode)) {
+    // Sets $car
+    $car = null;
 
-            for ($i = 0; $i <= $selectedCar->getMaxGasTank(); $i + 10) {
-                echo "\n" . $selectedCar->getMake() . " with licence plate " .
-                    $selectedCar->getLicencePlate() . " traveled $distance km" .
-                    PHP_EOL;
+    while ($car === null) {
 
-                echo "Remaining gas: " . $selectedCar->getMaxGasTank() . " litres\n";
-                $selectedCar->driveCar();
-                $carMilage += $distance;
-                echo "Total car milage of " . $selectedCar->getMake() . ": $carMilage km\n";
-                sleep(1);
+        $car = readline("\nChoose your car by its ID number: ");
+
+        foreach ($cars as $index => $carObject) {
+
+            if ($car == $index + 1) {
+                $car = $carObject;
+                echo "You have choosen " . $car->getMake() . PHP_EOL;
+                break;
             }
-        } else {
-            echo "Wrong pincode! Try again!\n";
         }
-    } else {
-        echo "Wrong name. Try again!\n";
+
+        if ($car !== $carObject) {
+            echo "\nWrong car ID! Try again!\n";
+            $car = null;
+        }
+    }
+
+    // Pincode logic
+    $pass = false;
+    $attempts = 3;
+
+    while ($pass === false) {
+
+        $pincode = readline("\nEnter pincode (3-digit code): ");
+
+        if ($pincode == $car->getPincode()) {
+            $pass = true;
+            echo "\nPincode is CORRECT!\n";
+            echo "\nLET'S DRIVE!\n";
+        } elseif ($pincode !== $car->getPincode()) {
+            echo "\nPincode is NOT CORRECT!\n";
+            $attempts--;
+            echo "\nYou have lafet $attempts attempts!\n";
+            $pass = false;
+        }
+
+        if ($attempts === 0) {
+            exit("You have been locked out from the itnerface. Bye!\n");
+        }
+    }
+
+    // Logic for driving
+
+    for ($i = 0; $i <= $car->getMaxGasTank(); $i + 10) {
+        echo "\n" . $car->getMake() . " with licence plate " .
+            $car->getLicencePlate() . " traveled " . $car->addTotalMileage() . " km" .
+            PHP_EOL;
+
+        echo "Remaining gas: " . $car->getMaxGasTank() . " litres\n";
+        $car->driveCar();
+        $car->getTotalMileage();
+        echo "Total milage of " . $car->getMake() . ": " . $car->getTotalMileage() . " km\n";
+        sleep(1);
+    }
+
+    // Repeat the drive with another car
+    $driveAgain = readline("\nDrive again with another car? Type y/n: ");
+
+    if ($driveAgain === "n") {
+        $driveFinished = true;
+    } elseif ($driveAgain === "y") {
+        $refuel = readline("\nRefuel this car? Type y/n: ");
+
+        if ($refuel === "n") {
+            $driveFinished = false;
+        } elseif ($refuel === "y") {
+            $car->refuelGas(50);
+            echo "\nYour " . $car->getMake() . " is refueled.";
+            echo "\nYou have " . $car->getMaxGasTank() . " in your tank.";
+        }
+
+        $driveFinished = false;
     }
 }
