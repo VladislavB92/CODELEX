@@ -29,8 +29,11 @@ class Car
     private $maxGasTank = 50;
     private $pinCode;
 
-    public function __construct($make, $licencePlate, $pinCode)
-    {
+    public function __construct(
+        string $make,
+        string $licencePlate,
+        int $pinCode
+    ) {
         $this->make = $make;
         $this->licencePlate = $licencePlate;
         $this->pinCode = $pinCode;
@@ -55,7 +58,7 @@ class Car
     {
         $this->maxGasTank -= 0.7;
     }
-    public function getPincode()
+    public function getPincode(): int
     {
         return $this->pinCode;
     }
@@ -85,10 +88,13 @@ foreach ($cars as $selectedCar) {
 
     if ($choosenCar == $selectedCar->getMake()) {
 
-        if ($selectedCar->getPincode() == $enteredPincode) {
+        if ($selectedCar->getPincode() === intval($enteredPincode)) {
 
             for ($i = 0; $i <= $selectedCar->getMaxGasTank(); $i + 10) {
-                echo "\n" . $selectedCar->getMake() . " with licence plate " . $selectedCar->getLicencePlate() . " traveled $distance km" . PHP_EOL;
+                echo "\n" . $selectedCar->getMake() . " with licence plate " .
+                    $selectedCar->getLicencePlate() . " traveled $distance km" .
+                    PHP_EOL;
+
                 echo "Remaining gas: " . $selectedCar->getMaxGasTank() . " litres\n";
                 $selectedCar->driveCar();
                 $carMilage += $distance;
