@@ -27,11 +27,13 @@ class Car
     private $make;
     private $licencePlate;
     private $maxGasTank = 50;
+    private $pinCode;
 
-    public function __construct($make, $licencePlate)
+    public function __construct($make, $licencePlate, $pinCode)
     {
         $this->make = $make;
         $this->licencePlate = $licencePlate;
+        $this->pinCode = $pinCode;
     }
 
     public function getMake(): string
@@ -49,16 +51,20 @@ class Car
         return round($this->maxGasTank, 2);
     }
 
-    public function driveCar()
+    public function driveCar(): void
     {
         $this->maxGasTank -= 0.7;
+    }
+    public function getPincode()
+    {
+        return $this->pinCode;
     }
 }
 
 $cars = [
-    $bugatti = new Car("Bugatti", "LV-7777"),
-    $lambo = new Car("Lamborghini", "LT-69"),
-    $lada = new Car("LADA NIVA", "PS-356"),
+    $bugatti = new Car("Bugatti", "LV-7777", 3456),
+    $lambo = new Car("Lamborghini", "LT-69", 1234),
+    $lada = new Car("LADA NIVA", "PS-356", 9876),
 ];
 
 
@@ -73,14 +79,23 @@ echo "Lamborghini\n";
 echo "LADA NIVA\n";
 
 foreach ($cars as $selectedCar) {
+
     $choosenCar = readline("Choose your car: ");
+    $enteredPincode = readline("Enter pin-code: ");
+
     if ($choosenCar == $selectedCar->getMake()) {
-        for ($i = 0; $i <= $selectedCar->getMaxGasTank(); $i + 10) {
-            echo "\n" . $selectedCar->getMake() . " with licence plate " . $selectedCar->getLicencePlate() . " traveled $distance km" . PHP_EOL;
-            echo "Remaining gas: " . $selectedCar->getMaxGasTank() . " litres\n";
-            $selectedCar->driveCar();
-            $carMilage += $distance;
-            echo "Total car milage of " . $selectedCar->getMake() . ": $carMilage km\n";
+
+        if ($selectedCar->getPincode() == $enteredPincode) {
+
+            for ($i = 0; $i <= $selectedCar->getMaxGasTank(); $i + 10) {
+                echo "\n" . $selectedCar->getMake() . " with licence plate " . $selectedCar->getLicencePlate() . " traveled $distance km" . PHP_EOL;
+                echo "Remaining gas: " . $selectedCar->getMaxGasTank() . " litres\n";
+                $selectedCar->driveCar();
+                $carMilage += $distance;
+                echo "Total car milage of " . $selectedCar->getMake() . ": $carMilage km\n";
+            }
+        } else {
+            echo "Wrong pincode! Try again!\n";
         }
     } else {
         echo "Wrong name. Try again!\n";
