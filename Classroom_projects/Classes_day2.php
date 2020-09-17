@@ -82,5 +82,7 @@ foreach ($cars as $selectedCar) {
             $carMilage += $distance;
             echo "Total car milage of " . $selectedCar->getMake() . ": $carMilage km\n";
         }
+    } else {
+        echo "Wrong name. Try again!\n";
     }
 }
