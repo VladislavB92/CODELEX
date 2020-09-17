@@ -28,15 +28,18 @@ class Car
     private $licencePlate;
     private $maxGasTank = 50;
     private $pinCode;
+    private $fuelConsumption;
 
     public function __construct(
         string $make,
         string $licencePlate,
-        int $pinCode
+        int $pinCode,
+        float $fuelConsumption
     ) {
         $this->make = $make;
         $this->licencePlate = $licencePlate;
         $this->pinCode = $pinCode;
+        $this->fuelConsumption = $fuelConsumption;
     }
 
     public function getMake(): string
@@ -56,7 +59,7 @@ class Car
 
     public function driveCar(): void
     {
-        $this->maxGasTank -= 0.7;
+        $this->maxGasTank -= $this->fuelConsumption;
     }
     public function getPincode(): int
     {
@@ -65,15 +68,13 @@ class Car
 }
 
 $cars = [
-    $bugatti = new Car("Bugatti", "LV-7777", 3456),
-    $lambo = new Car("Lamborghini", "LT-69", 1234),
-    $lada = new Car("LADA NIVA", "PS-356", 9876),
+    $bugatti = new Car("Bugatti", "LV-7777", 3456, 2.0),
+    $lambo = new Car("Lamborghini", "LT-69", 1234, 1.5),
+    $lada = new Car("LADA NIVA", "PS-356", 9876, 0.7),
 ];
-
 
 $distance = 10;
 $carMilage = 0;
-
 
 echo "\nWELCOME TO OUR GARAGE!\n";
 echo "Choose your car:\n";
@@ -99,6 +100,7 @@ foreach ($cars as $selectedCar) {
                 $selectedCar->driveCar();
                 $carMilage += $distance;
                 echo "Total car milage of " . $selectedCar->getMake() . ": $carMilage km\n";
+                sleep(1);
             }
         } else {
             echo "Wrong pincode! Try again!\n";
