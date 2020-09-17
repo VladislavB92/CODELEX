@@ -24,11 +24,11 @@
 
 class Car
 {
-    private $make;
-    private $licencePlate;
-    private $maxGasTank = 50;
-    private $pinCode;
-    private $fuelConsumption;
+    private string $make;
+    private string $licencePlate;
+    private float $maxGasTank = 50.0;
+    private int $pinCode;
+    private float  $fuelConsumption;
 
     public function __construct(
         string $make,
@@ -52,7 +52,7 @@ class Car
         return $this->licencePlate;
     }
 
-    public function getMaxGasTank(): string
+    public function getMaxGasTank(): float
     {
         return round($this->maxGasTank, 2);
     }
