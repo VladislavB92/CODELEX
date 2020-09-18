@@ -12,9 +12,7 @@ $file = 'files/words.csv';
 
 // Array of words.
 if (($handle = fopen($file, "r")) !== FALSE) {
-
     while (($word = fgetcsv($handle, 1000, ",")) !== FALSE) {
-
         $words = $word;
     }
     fclose($handle);
@@ -22,8 +20,6 @@ if (($handle = fopen($file, "r")) !== FALSE) {
 
 // Choosing random word from the list.
 $randomWord = $words[rand(0, count($words) - 1)];
-
-echo $randomWord;
 
 // Splits randomly choosen word into single char arrays.
 $splittedRandomWordArray = str_split($randomWord);
@@ -41,7 +37,14 @@ foreach ($hiddenSplittedRandomWordArray as &$letter) {
     $letter = $hiddenChar;
 }
 
-echo "\nWELCOME TO 'GUESS THE WORD!'\n";
+echo "\n-=-=WELCOME TO THE 'GUESS THE WORD!'=-=-\n";
+echo "\nGAME RULES:\n";
+echo "\n=You have 5 tries to guess the word.\n";
+echo "=After 5th wrong try you will have a choice\n";
+echo "=to delete the incorrect letter archive\n";
+echo "=and play again, or give up and see the word!\n";
+sleep(3);
+
 
 while ($end == false) {
     echo "\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n";
@@ -68,12 +71,12 @@ while ($end == false) {
 
         // Restarts guessing.
         if ($missCount > 4) {
-            echo "\nYOU LOST!\n";
-            $playAgain = readline("Restart ang guess again? y/n ");
-            if ($playAgain === "y") {
+            echo "\nOUT OF TRIES!\nYOU LOST!\n";
+            $playAgain = readline("\nGive up? y/n ");
+            if ($playAgain === "n") {
                 $missCount = 0;
                 $misses = [];
-            } elseif ($playAgain === "n") {
+            } elseif ($playAgain === "y") {
                 echo "The correct word was: " . implode(" ", $splittedRandomWordArray)
                     . PHP_EOL;
                 exit("\nBye!\n");
