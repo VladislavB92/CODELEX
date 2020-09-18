@@ -29,22 +29,23 @@ class Car
     private string $licencePlate; // Latvian standard
     private int $pinCode; // 3-digit code
     private float $fuelConsumption; // litres/10km
-    private float $maxGasTank = 50.0; // litres
+    private float $maxGasTank; // litres
     private float $totalMileage = 0; // kilometres
-    private float $actualMileage;
 
     public function __construct(
         int $uniqueID,
         string $make,
         string $licencePlate,
         int $pinCode,
-        float $fuelConsumption
+        float $fuelConsumption,
+        float $maxGasTank
     ) {
         $this->uniqueID = $uniqueID;
         $this->make = $make;
         $this->licencePlate = $licencePlate;
         $this->pinCode = $pinCode;
         $this->fuelConsumption = $fuelConsumption;
+        $this->maxGasTank = $maxGasTank;
     }
 
     public function getUniqueId(): int
@@ -72,7 +73,6 @@ class Car
         return $this->maxGasTank;
     }
 
-
     public function getTotalMileage(): float
     {
         return $this->totalMileage;
@@ -85,20 +85,20 @@ class Car
 
     public function addTotalMileage()
     {
-        $this->totalMileage += 10;
+        $this->totalMileage = $this->getTotalMileage() + 10;
     }
 
-    public function refuelGas(int $litres): void
+    public function refuelGas($level): void
     {
-        $this->maxGasTank += $litres;
+        $this->maxGasTank += $level;
     }
 }
 
 // Car initialization
 $cars = [
-    $bugatti = new Car(1, "Bugatti Veyron", "LV-7777", 345, 2.1),
-    $lambo = new Car(2, "Lamborghini Diablo", "LT-69", 123, 1.5),
-    $lada = new Car(3, "LADA NIVA", "PS-356", 987, 0.7),
+    $bugatti = new Car(1, "Bugatti Veyron", "LV-7777", 345, 2.1, 100),
+    $lambo = new Car(2, "Lamborghini Diablo", "LT-69", 123, 1.5, 95),
+    $lada = new Car(3, "LADA NIVA", "VS-356", 987, 0.7, 45),
 ];
 
 echo "\nWELCOME TO OUR GARAGE!\n";
@@ -112,7 +112,7 @@ while ($driveFinished === false) {
         echo "\nCar ID " . $car->getUniqueID();
         echo "\nModel: " . $car->getMake() . PHP_EOL;
         echo "License plate: " . $car->getLicencePlate() . PHP_EOL;
-        echo "Car totalMileage: " . $car->getTotalMileage() . PHP_EOL;
+        echo "Car total mileage: " . $car->getTotalMileage() . PHP_EOL;
     }
 
     // Sets $car
@@ -163,16 +163,17 @@ while ($driveFinished === false) {
 
     // Logic for driving
 
-    for ($i = 0; $i <= $car->getMaxGasTank(); $i + 10) {
+    while ($car->getMaxGasTank() >= 0) {
         echo "\n" . $car->getMake() . " with licence plate " .
-            $car->getLicencePlate() . " traveled " . $car->addTotalMileage() . " km" .
-            PHP_EOL;
-
+            $car->getLicencePlate() . PHP_EOL;
         echo "Remaining gas: " . $car->getMaxGasTank() . " litres\n";
-        $car->driveCar();
-        $car->getTotalMileage();
         echo "Total milage of " . $car->getMake() . ": " . $car->getTotalMileage() . " km\n";
-        sleep(1);
+
+        $car->getTotalMileage();
+        $car->addTotalMileage();
+        $car->driveCar();
+
+        // sleep(1);
     }
 
     // Repeat the drive with another car
@@ -186,9 +187,10 @@ while ($driveFinished === false) {
         if ($refuel === "n") {
             $driveFinished = false;
         } elseif ($refuel === "y") {
-            $car->refuelGas(50);
+            $level = readline("How much liters: ");
+            $car->refuelGas($level);
             echo "\nYour " . $car->getMake() . " is refueled.";
-            echo "\nYou have " . $car->getMaxGasTank() . " in your tank.";
+            echo "\nYou have " . $car->getMaxGasTank() . " in your tank.\n";
         }
 
         $driveFinished = false;
