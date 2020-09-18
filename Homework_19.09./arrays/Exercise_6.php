@@ -9,7 +9,7 @@ It must display letters they have already guessed
 (either only the incorrect guesses or all guesses). */
 
 // Array of words.
-$words = ["computer"];
+$words = ["hangman"];
 
 // Choosing random word from the list.
 $randomWord = $words[rand(0, count($words) - 1)];
@@ -20,47 +20,45 @@ $hiddenSplittedRandomWordArray = $splittedRandomWordArray;
 
 $hiddenChar = " _ ";
 
-// print_r($splittedRandomWordArray);
-
-$wordToGuessInString = implode("", $splittedRandomWordArray);
 $win = false;
 
 foreach ($hiddenSplittedRandomWordArray as &$letter) {
     $letter = $hiddenChar;
 }
 
+
 while ($win == false) {
-    echo "Hidden\n";
+    echo "\n";
+    echo implode(" ", $hiddenSplittedRandomWordArray) . PHP_EOL;
     print_r($hiddenSplittedRandomWordArray);
+    $input = readline("\nChoose letter: ");
+    $key = array_search($input, $splittedRandomWordArray); // Returns index (key).
 
-    for ($i = 0; $letter <= count($hiddenSplittedRandomWordArray) - 1; $i++) {
-        $input = readline("\nChoose letter: ");
+    // If input is present in the array...
+    if (in_array($input, $splittedRandomWordArray)) {
+        
+        // Search the index of the input in this array
+        
+        echo $key;
+        $hiddenSplittedRandomWordArray[$key] = $input;
+        echo "CORRECT!\n";
+        
+        
+    } elseif (in_array($input, $splittedRandomWordArray) == false) {
 
-        if ($splittedRandomWordArray[$i] == $input) {
-            $hiddenSplittedRandomWordArray[$i] = $input;
-            echo "\nCicle $i\n";
-            echo "Hidden\n";
-            print_r($hiddenSplittedRandomWordArray);
-            echo "Open\n";
-            print_r($splittedRandomWordArray);
-        } elseif ($splittedRandomWordArray[$i] != $input) {
+        echo "\nWrong letter!\n";
 
-            echo "Wrong letter!\n";
-            echo "Hidden\n";
-            echo "\nCicle $i\n";
-            print_r($hiddenSplittedRandomWordArray);
-            echo "Open\n";
-            print_r($splittedRandomWordArray);
-        }
+    }
 
-        // Determines win
-        if ($splittedRandomWordArray == $hiddenSplittedRandomWordArray) {
-            echo "You win!";
-            $win = true;
-            break;
-        } else {
-            $win = false;
-        }
+    // Determines win
+    if ($splittedRandomWordArray == $hiddenSplittedRandomWordArray) {
+        echo "\nYOU WIN!\n";
+        echo "\nThe correct word is: " . implode(" ", $hiddenSplittedRandomWordArray) . PHP_EOL;
+
+        $win = true;
+        break;
+    } else {
+        $win = false;
     }
 }
 
