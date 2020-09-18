@@ -25,39 +25,44 @@ $hiddenChar = " _ ";
 $wordToGuessInString = implode("", $splittedRandomWordArray);
 $win = false;
 
-while ($win == false) {
-
-
-    for ($i = 0; $i <= count($splittedRandomWordArray) - 1; $i++) {
-        
-        $hiddenSplittedRandomWordArray[$i] = $hiddenChar;
-        print_r($hiddenSplittedRandomWordArray);
-
-        for ($letter = 0; $letter <= count($splittedRandomWordArray) - 1; $letter++) {
-            $input = readline("\nChoose letter: ");
-            if ($input == $splittedRandomWordArray[$letter]) {
-                $hiddenSplittedRandomWordArray[$i] = $input;
-                print_r($hiddenSplittedRandomWordArray);
-                break;
-            } else {
-                $hiddenSplittedRandomWordArray[$i] = $hiddenChar;
-                echo "Wrong letter!\n";
-                break;
-            }
-        }
-        break;
-    }
-
-
-    if ($splittedRandomWordArray == $hiddenSplittedRandomWordArray) {
-        echo "You win!";
-        $win = true;
-    } else {
-        $win = false;
-    }
+foreach ($hiddenSplittedRandomWordArray as &$letter) {
+    $letter = $hiddenChar;
 }
 
+while ($win == false) {
+    echo "Hidden\n";
+    print_r($hiddenSplittedRandomWordArray);
 
+    for ($i = 0; $letter <= count($hiddenSplittedRandomWordArray) - 1; $i++) {
+        $input = readline("\nChoose letter: ");
+
+        if ($splittedRandomWordArray[$i] == $input) {
+            $hiddenSplittedRandomWordArray[$i] = $input;
+            echo "\nCicle $i\n";
+            echo "Hidden\n";
+            print_r($hiddenSplittedRandomWordArray);
+            echo "Open\n";
+            print_r($splittedRandomWordArray);
+        } elseif ($splittedRandomWordArray[$i] != $input) {
+
+            echo "Wrong letter!\n";
+            echo "Hidden\n";
+            echo "\nCicle $i\n";
+            print_r($hiddenSplittedRandomWordArray);
+            echo "Open\n";
+            print_r($splittedRandomWordArray);
+        }
+
+        // Determines win
+        if ($splittedRandomWordArray == $hiddenSplittedRandomWordArray) {
+            echo "You win!";
+            $win = true;
+            break;
+        } else {
+            $win = false;
+        }
+    }
+}
 
 echo "\n";
 
