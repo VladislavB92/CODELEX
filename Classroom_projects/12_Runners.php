@@ -6,19 +6,25 @@
 // When one player moves 1km, his speed and distance is outputted
 // When one player gets to finish, he is declared as a winner
 
-$field1 = ["_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_"];
-$field2 = ["_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_"];
 
+$fieldLength = rand(50, 90);
+$field1 = [];
+
+for ($i = 0; $i < $fieldLength; $i++) {
+    array_push($field1, "_");
+}
+$field2 = $field1;
 
 $player1 = "X";
 $player2 = "O";
 $position1 = 0;
 $position2 = 0;
-$speed1 = rand(1, 4);
-$speed2 = rand(1, 4);
+
 $finishLine = false;
 
 while ($finishLine == false) {
+    $speed1 = rand(1, 5);
+    $speed2 = rand(1, 5);
 
     $field1[$position1] = $player1;
     $field2[$position2] = $player2;
@@ -29,21 +35,22 @@ while ($finishLine == false) {
 
     $position1 += $speed1;
     $position2 += $speed2;
-    
+
     $field1[$position1 - $speed1] = "_";
     $field2[$position2 - $speed2] = "_";
 
-    if ($position1 > 21 && $position2 < 21) {
-        echo "The winner is $player1!\n";
+    if ($position1 > $fieldLength && $position2 < $fieldLength) {
+        echo implode(" ", $field1) . "The winner is $player1!\n";
+        echo "Track 2 | " . implode(" ", $field2) . PHP_EOL;
         $finishLine = true;
-    } elseif ($position1 < 21 && $position2 > 21) {
-        echo "The winner is $player2!\n";
+    } elseif ($position1 < $fieldLength && $position2 > $fieldLength) {
+        echo "Track 1 | " . implode(" ", $field1) . PHP_EOL;
+        echo implode(" ", $field2) . "The winner is $player2!\n";
         $finishLine = true;
-    } elseif ($position1 > 21 && $position2 > 21) {
+    } elseif ($position1 > $fieldLength && $position2 > $fieldLength) {
         echo "It's a tie!\n";
         $finishLine = true;
     }
-    
-    sleep(1);
 
+    sleep(1);
 }
