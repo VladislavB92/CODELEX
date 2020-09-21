@@ -20,10 +20,11 @@ same naming classes with different namespace.
 // Namespaces
 // Index.php
 
-require_once "src/Spices/Spice.php";
-require_once "src/Spices/Paprika/Paprika.php";
-require_once "src/Spices/Salt/Salt.php";
-require_once "src/Spices/SpicesCollection.php";
+require_once 'src/Spices/Spice.php';
+require_once 'src/Spices/SpicesCollection.php';
+require_once 'src/autoload.php';
+includeClass($classes);
+includeClass($classes);
 
 use src\Spices\Paprika;
 use src\Spices\Salt;
