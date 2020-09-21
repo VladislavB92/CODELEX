@@ -36,6 +36,6 @@ $spices->add(new Paprika("paprika", "sweet", "red", "mild"));
 foreach ($spices->all() as $spice)
 {
     echo $spice->getName() . " has a " . $spice->getTaste() . 
-    "taste, is the color of " . $spice->getColor() 
-    . PHP_EOL;
+    " taste, is the color of " . $spice->getColor() . 
+    "." . PHP_EOL;
 } 
