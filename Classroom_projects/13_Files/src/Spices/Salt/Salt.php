@@ -2,7 +2,7 @@
 
 namespace src\Spices;
 
-class Salt extends Spices
+class Salt extends Spice
 {
     private string $name;
     private string $taste;
