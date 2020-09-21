@@ -21,10 +21,10 @@ same naming classes with different namespace.
 // Index.php
 
 require_once 'src/Spices/Spice.php';
-require_once 'src/Spices/Paprika/Paprika.php';
-require_once 'src/Spices/Salt/Salt.php';
 require_once 'src/Spices/SpicesCollection.php';
-
+foreach(glob('src/Spices/*/*.php') as $file) {
+    require_once $file;
+}
 
 use src\Spices\Paprika;
 use src\Spices\Salt;
