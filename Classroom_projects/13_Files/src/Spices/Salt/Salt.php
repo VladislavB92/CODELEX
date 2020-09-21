@@ -9,10 +9,10 @@ class Salt extends Spice
     private string $color;
 
     public function __construct(
-        string $name, 
-        string $taste, 
+        string $name,
+        string $taste,
         string $color
-        ){
+    ) {
         $this->name = $name;
         $this->taste = $taste;
         $this->color = $color;

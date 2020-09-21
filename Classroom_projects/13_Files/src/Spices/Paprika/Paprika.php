@@ -7,18 +7,15 @@ class Paprika extends Spice
     private string $name;
     private string $taste;
     private string $color;
-    private string $spiceness;
 
     public function __construct(
         string $name,
-        string $taste, 
-        string $color, 
-        string $spiceness
-    ){
+        string $taste,
+        string $color
+    ) {
         $this->name = $name;
         $this->taste = $taste;
         $this->color = $color;
-        $this->spiceness = $spiceness;
     }
 
     public function getName(): string

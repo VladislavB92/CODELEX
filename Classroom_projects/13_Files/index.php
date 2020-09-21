@@ -22,7 +22,7 @@ same naming classes with different namespace.
 
 require_once 'src/Spices/Spice.php';
 require_once 'src/Spices/SpicesCollection.php';
-foreach(glob('src/Spices/*/*.php') as $file) {
+foreach (glob('src/Spices/*/*.php') as $file) {
     require_once $file;
 }
 
@@ -32,11 +32,10 @@ use src\Spices\SpicesCollection;
 
 $spices = new SpicesCollection();
 $spices->add(new Salt("salt", "salty", "blue"));
-$spices->add(new Paprika("paprika", "sweet", "red", "mild"));
+$spices->add(new Paprika("paprika", "sweet", "red"));
 
-foreach ($spices->all() as $spice)
-{
-    echo $spice->getName() . " has a " . $spice->getTaste() . 
-    " taste, is the color of " . $spice->getColor() . 
-    "." . PHP_EOL;
-} 
+foreach ($spices->all() as $spice) {
+    echo $spice->getName() . " has a " . $spice->getTaste() .
+        " taste, is the color of " . $spice->getColor() .
+        "." . PHP_EOL;
+}
