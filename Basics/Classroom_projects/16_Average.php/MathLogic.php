@@ -36,7 +36,7 @@ class MathtLogic
         $this->average = array_sum($array) / count($count);
     }
 
-    public function saveInArray($temporaryNumber)
+    public function saveInArray($temporaryNumber): void
     {
         $this->numberArray[] = $temporaryNumber;
     }
