@@ -20,7 +20,7 @@ class MathtLogic
         $this->count++;
     }
 
-    public function setAverage(array $array, array $count): void
+    public function calculateAverage(array $array, array $count): void
     {
         $this->average = array_sum($array) / count($count);
     }

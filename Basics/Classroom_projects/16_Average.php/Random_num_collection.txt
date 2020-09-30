@@ -1,6 +1,147 @@
-Number: 141
-Average: 141
+Number: 386
+Average: 386
 
-Number: 772
-Average: 772
+Number: 929
+Average: 657
+
+Number: 528
+Average: 614
+
+Number: 657
+Average: 625
+
+Number: 397
+Average: 579
+
+Number: 476
+Average: 562
+
+Number: 939
+Average: 616
+
+Number: 249
+Average: 570
+
+Number: 27
+Average: 509
+
+Number: 874
+Average: 546
+
+Number: 882
+Average: 576
+
+Number: 505
+Average: 570
+
+Number: 601
+Average: 573
+
+Number: 148
+Average: 542
+
+Number: 57
+Average: 510
+
+Number: 136
+Average: 486
+
+Number: 747
+Average: 502
+
+Number: 276
+Average: 489
+
+Number: 805
+Average: 506
+
+Number: 571
+Average: 509
+
+Number: 220
+Average: 495
+
+Number: 322
+Average: 487
+
+Number: 716
+Average: 497
+
+Number: 809
+Average: 510
+
+Number: 803
+Average: 522
+
+Number: 372
+Average: 516
+
+Number: 752
+Average: 525
+
+Number: 295
+Average: 517
+
+Number: 203
+Average: 506
+
+Number: 456
+Average: 504
+
+Number: 331
+Average: 499
+
+Number: 705
+Average: 505
+
+Number: 685
+Average: 510
+
+Number: 185
+Average: 501
+
+Number: 31
+Average: 487
+
+Number: 997
+Average: 502
+
+Number: 191
+Average: 493
+
+Number: 361
+Average: 490
+
+Number: 923
+Average: 501
+
+Number: 15
+Average: 489
+
+Number: 704
+Average: 494
+
+Number: 726
+Average: 499
+
+Number: 379
+Average: 497
+
+Number: 803
+Average: 503
+
+Number: 613
+Average: 506
+
+Number: 961
+Average: 516
+
+Number: 848
+Average: 523
+
+Number: 157
+Average: 515
+
+Number: 621
+Average: 517
 
