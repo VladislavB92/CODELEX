@@ -1,6 +1,6 @@
 <?php
 
-class RandomNumber
+class RandomNumberGenerator
 {
     private int $randNum;
 

@@ -1,27 +1,37 @@
 <?php
 
-include 'RandomNumber.php';
-include 'MathLogic.php';
+require_once 'RandomNumberGenerator.php';
+require_once 'MathLogic.php';
+require_once 'NumberStorage.php';
 
-$ranInt = new RandomNumber();
+$randomNumber = new RandomNumberGenerator();
 $math = new MathtLogic();
+$storage = new NumberStorage();
+$allNumbers = [];
 
 while ($math->getCount() < 50) {
-    $ranInt->setRandNum(rand(1, 1000));
-    $math->storeTemporaryNumber($ranInt->getRandNum());
+    $randomNumber->setRandNum(rand(1, 1000));
+    $storage->storeTemporaryNumber($randomNumber->getRandNum());
 
-    $myfile = fopen("Random_num_collection.txt", "a+") or die("Unable to open file!");
-    $txt = $math->getTemporaryNumber();;
-    fwrite($myfile, "$txt ");
+    $numLog = fopen("Random_num_collection.txt", "a+") or die("Unable to open file!");
+    $allNumbers[] = $storage->getTemporaryNumber();
 
-    echo "Number: " . $math->getTemporaryNumber() . PHP_EOL;
-    $math->saveInArray($math->getTemporaryNumber());
+    fwrite($numLog, "Number: " . $storage->getTemporaryNumber() . "\n");
 
-    $math->setAverage($math->getNumberArray(), $math->getNumberArray());
-    echo "Average: " . round($math->getAverage(), 2) . PHP_EOL;
+    echo "Numbers: " . implode(", ", $allNumbers) . PHP_EOL;
 
+    $storage->saveInArray($storage->getTemporaryNumber());
+
+    $math->setAverage($storage->getNumberArray(), $storage->getNumberArray());
+
+    echo "===The average of " . $math->getCount() . " num. is: " . 
+    round($math->getAverage(), 2) . PHP_EOL;
+
+    fwrite($numLog, "Average: " . round($math->getAverage(), 2) . PHP_EOL);
+    fwrite($numLog, "\n");
+    
     $math->incrementCount();
     echo ("\n");
 }
 
-fclose($myfile);
+fclose($numLog);
