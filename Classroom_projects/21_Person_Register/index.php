@@ -27,10 +27,11 @@ $foundedPerson = $dataStorage->searchByPersCode($persCode);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Person register</title>
+</head>
 
+<body>
     <h2>Save the person in the database</h2>
     <form action="/" method="post">
-
         <label for="name">Name:</label>
         <input type="text" id="name" name="name"><br>
 
@@ -47,7 +48,6 @@ $foundedPerson = $dataStorage->searchByPersCode($persCode);
         <?php if (isset($_POST["submit1"])) : ?>
             <p style="font-weight: bold;">Saved!</p>
         <?php endif; ?>
-
     </form>
 
     Name: <?= $person->getName(); ?><br>
@@ -70,11 +70,6 @@ $foundedPerson = $dataStorage->searchByPersCode($persCode);
     <?php else : ?>
         <?= 'Empty' ?>
     <?php endif; ?>
-
-</head>
-
-<body>
-
 </body>
 
 </html>
