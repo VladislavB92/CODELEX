@@ -1,13 +1,16 @@
 <?php
 
+declare(strict_types=1);
 
+require_once 'Person.php';
+require_once 'PersonRegister.php';
 
-$response = file_get_contents("https://api.agify.io//?name=" .  $_GET['name'] ?? ' ');
+$personRegister = new PersonRegister();
 
-$decodedResponse = json_decode($response);
+$name = $_POST['name'] ?? 'person';
 
+$person = $personRegister->getByName($name);
 
-var_dump($decodedResponse);
 ?>
 
 <html lang="en">
@@ -15,23 +18,22 @@ var_dump($decodedResponse);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>API call exercise</title>
 </head>
 
 <body>
-
-    <form action="/" method="get">
-
+    <form action="/" method="post">
         <label for="name">Name:</label>
 
         <input type="text" id="name" name="name">
 
-        <button type="submit">submit</button>
-
+        <button type="submit">Submit</button>
 
     </form>
 
-
+    Name: <?= $person->getName(); ?><br>
+    Age: <?= $person->getAge(); ?><br>
+    Count: <?= $person->getCount(); ?><br>
 </body>
 
 </html>
