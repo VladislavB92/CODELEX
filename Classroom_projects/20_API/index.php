@@ -7,7 +7,7 @@ require_once 'PersonRegister.php';
 
 $personRegister = new PersonRegister();
 
-$name = $_POST['name'] ?? 'Nobody';
+$name = $_POST['name'] ?? 'person';
 
 $person = $personRegister->getByName($name);
 
@@ -31,7 +31,9 @@ $person = $personRegister->getByName($name);
 
     </form>
 
-    <?= $person->getName() . ': ' . $person->getAge() . ', ' . $person->getCount(); ?>
+    Name: <?= $person->getName(); ?><br>
+    Age: <?= $person->getAge(); ?><br>
+    Count: <?= $person->getCount(); ?><br>
 </body>
 
 </html>
