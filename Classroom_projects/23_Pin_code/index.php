@@ -43,7 +43,6 @@ $splittedPin = str_split($_SESSION["pincode"]);
     <br>
 
     <form action="/" method="post">
-
         <input type="submit" id="button" name="button" value="1">
         <input type="submit" id="button" name="button" value="2">
         <input type="submit" id="button" name="button" value="3"><br>
@@ -54,8 +53,6 @@ $splittedPin = str_split($_SESSION["pincode"]);
         <input type="submit" id="button" name="button" value="8">
         <input type="submit" id="button" name="button" value="9"><br>
         <input type="submit" id="button" name="button" value="0">
-
-
     </form>
 </body>
 
