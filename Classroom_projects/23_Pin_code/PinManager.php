@@ -11,7 +11,7 @@ class PinManager
         $this->correctPin = $correctPin;
     }
 
-    public function getCorrectPin(): string
+    private function getCorrectPin(): string
     {
         return $this->correctPin;
     }
