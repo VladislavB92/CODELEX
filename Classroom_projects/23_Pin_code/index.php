@@ -7,7 +7,7 @@ require_once 'PinManager.php';
 session_start();
 
 $pinManager = new PinManager();
-$splittedPin = str_split($pinManager->fillPin($_POST['button'] ?? 'XXX'));
+$splittedPin = str_split($pinManager->fillPin($_POST['button'] ?? ""));
 
 ?>
 
