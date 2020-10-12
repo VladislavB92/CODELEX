@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
+require_once 'PinManager.php';
+
 session_start();
 
-$correctPin = "3399";
+$correctPin = new PinManager('3399');
 
 if (isset($_POST['button']) && strlen($_SESSION["code"]) < 4) {
     if ($_SESSION["code"] !== "") {
@@ -10,18 +14,11 @@ if (isset($_POST['button']) && strlen($_SESSION["code"]) < 4) {
     }
 
     $_SESSION["code"] .= $_POST['button'];
-
 } else {
     $_SESSION["code"] = "";
 }
 
 $splittedPin = str_split($_SESSION["code"]);
-
-if ($_SESSION["code"] === $correctPin) {
-    echo "UNLOCKED";
-} else {
-    echo "LOCKED";
-}
 
 ?>
 
@@ -34,12 +31,16 @@ if ($_SESSION["code"] === $correctPin) {
 </head>
 
 <body>
-    <br>
+
+    <?= $correctPin->checkPin($_SESSION["code"]); ?>
+
+    <br><br>
     <?php foreach ($splittedPin as $digit) : ?>
         <?php if ($_SESSION["code"] != null) : ?>
             <?= "X" ?>
         <?php endif; ?>
     <?php endforeach; ?>
+    <br>
 
     <form action="/" method="post">
 
