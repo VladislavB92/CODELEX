@@ -25,7 +25,7 @@ $splittedPin = str_split($pinManager->fillPin($_POST['button'] ?? ""));
 
     <br><br>
     <?php foreach ($splittedPin as $digit) : ?>
-        <?php if ($_SESSION["pincode"] != null) : ?>
+        <?php if ($_SESSION["pincode"] != null && $digit !== " ") : ?>
             <?= "X" ?>
         <?php endif; ?>
     <?php endforeach; ?>
