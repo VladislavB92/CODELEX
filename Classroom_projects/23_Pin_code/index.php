@@ -6,7 +6,7 @@ require_once 'PinManager.php';
 
 session_start();
 
-$correctPin = new PinManager();
+$pinManager = new PinManager();
 
 if (isset($_POST['button']) && strlen($_SESSION["code"]) < 4) {
     if ($_SESSION["code"] !== "") {
@@ -32,7 +32,7 @@ $splittedPin = str_split($_SESSION["code"]);
 
 <body>
 
-    <?= $correctPin->checkPin($_SESSION["code"]); ?>
+    <?= $pinManager->checkPin($_SESSION["code"]); ?>
 
     <br><br>
     <?php foreach ($splittedPin as $digit) : ?>
