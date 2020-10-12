@@ -8,17 +8,17 @@ session_start();
 
 $pinManager = new PinManager();
 
-if (isset($_POST['button']) && strlen($_SESSION["code"]) < 4) {
-    if ($_SESSION["code"] !== "") {
-        $_SESSION["code"] .= "";
+if (isset($_POST['button']) && strlen($_SESSION["pincode"]) < 4) {
+    if ($_SESSION["pincode"] !== "") {
+        $_SESSION["pincode"] .= "";
     }
 
-    $_SESSION["code"] .= $_POST['button'];
+    $_SESSION["pincode"] .= $_POST['button'];
 } else {
-    $_SESSION["code"] = "";
+    $_SESSION["pincode"] = "";
 }
 
-$splittedPin = str_split($_SESSION["code"]);
+$splittedPin = str_split($_SESSION["pincode"]);
 
 ?>
 
@@ -32,11 +32,11 @@ $splittedPin = str_split($_SESSION["code"]);
 
 <body>
 
-    <?= $pinManager->checkPin($_SESSION["code"]); ?>
+    <?= $pinManager->checkPin($_SESSION["pincode"]); ?>
 
     <br><br>
     <?php foreach ($splittedPin as $digit) : ?>
-        <?php if ($_SESSION["code"] != null) : ?>
+        <?php if ($_SESSION["pincode"] != null) : ?>
             <?= "X" ?>
         <?php endif; ?>
     <?php endforeach; ?>
