@@ -4,12 +4,7 @@ declare(strict_types=1);
 
 class PinManager
 {
-    private string $correctPin;
-
-    public function __construct(string $correctPin)
-    {
-        $this->correctPin = $correctPin;
-    }
+    private string $correctPin = "3399";
 
     private function getCorrectPin(): string
     {

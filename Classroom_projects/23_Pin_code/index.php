@@ -6,7 +6,7 @@ require_once 'PinManager.php';
 
 session_start();
 
-$correctPin = new PinManager('3399');
+$correctPin = new PinManager();
 
 if (isset($_POST['button']) && strlen($_SESSION["code"]) < 4) {
     if ($_SESSION["code"] !== "") {
