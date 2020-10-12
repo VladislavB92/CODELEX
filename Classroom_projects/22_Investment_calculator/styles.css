@@ -1,3 +1,28 @@
-body {
-    background-color: aqua;
+html {
+    background-color: f1f3f8;
+}
+
+.header {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+    padding-top: 5%;
+    color: 393b44;
+}
+
+.calculator {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: right;
+    padding-top: 2%;
+    padding-right: 42%;
+    background-color: d6e0f0;
+    color: 393b44;
+}
+
+.result {
+    height: 50%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: f1f3f8;
+    text-align: center;
+    padding-top: 10%;
+    background-color: 8d93ab;
 }

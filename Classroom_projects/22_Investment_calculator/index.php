@@ -16,7 +16,7 @@ if (isset($_POST['amount'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculate your yearly gain</title>
-    <link rel="stylesheet" href="text/css" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -27,7 +27,7 @@ if (isset($_POST['amount'])) {
     <div class="calculator">
         <form action="/" method="post">
             <label for="amount">How much you want to invest?</label>
-            <input id="amount" type="text" name="amount"><br>
+            <input id="amount" type="text" name="amount"><br><br>
 
             <form action="/" method="post">
                 <label for="duration">For how many</label>
@@ -39,26 +39,28 @@ if (isset($_POST['amount'])) {
                                 <?= $i; ?>
                             <?php endif; ?> </option>
                     <?php endfor; ?>
-                </select><br>
+                </select><br><br>
 
                 <form action="/" method="post">
                     <label for="percentage">What is the percentage?</label>
-                    <input id="percentage" type="text" name="percentage"><br>
+                    <input id="percentage" type="text" name="percentage"><br><br>
 
                     <button type="submit">Calculate</button><br>
-                </form>
+                </form><br>
     </div>
 
     <div class="result">
         <?php if ($_POST != null) : ?>
-            <h2>If you will invest now €<?= $investment->getAmount(); ?>
-                for
-                <?= $investment->getDuration();
-                if ($investment->getDuration() > 1) : ?> years
-                <?php else : ?> year
-                <?php endif; ?>
-                under yearly rate of <?= $investment->getPercentage(); ?>%
-                you will get €<?= $investment->getTotal(); ?>!</h2>
+            <h2>If you will invest now <span style="color:d6e0f0">€<?= $investment->getAmount(); ?></span>
+                for <span style="color:d6e0f0">
+                    <?= $investment->getDuration();
+                    if ($investment->getDuration() > 1) : ?> years
+                    <?php else : ?> year
+                    <?php endif; ?> </span>
+                under yearly rate of <span style="color:d6e0f0">
+                    <?= $investment->getPercentage(); ?>%</span>
+                you will get <span style="color:d6e0f0">€<?= $investment->getTotal(); ?>.</span>
+            </h2>
         <?php endif; ?>
     </div>
 </body>
