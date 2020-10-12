@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 require_once 'MyInvestment.php';
 
-$investment = new MyInvestment(
-    (float) $_POST['amount'],
-    (int) $_POST['duration'],
-    (int) $_POST['percentage']
-);
+if (isset($_POST['amount'])) {
+    $investment = new MyInvestment();
+}
 
 ?>
 
@@ -18,6 +16,7 @@ $investment = new MyInvestment(
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculate your yearly gain</title>
+    <link rel="stylesheet" href="text/css" href="styles.css">
 </head>
 
 <body>
@@ -51,14 +50,16 @@ $investment = new MyInvestment(
     </div>
 
     <div class="result">
-        <h2>If you will invest now €<?= $investment->getAmount(); ?>
-            for
-            <?= $investment->getDuration();
-            if ($investment->getDuration() > 1) : ?> years
-            <?php else : ?> year
-            <?php endif; ?>
-            under yearly rate of <?= $investment->getPercentage(); ?>%
-            you will get €<?= $investment->getTotal(); ?>!</h2>
+        <?php if ($_POST != null) : ?>
+            <h2>If you will invest now €<?= $investment->getAmount(); ?>
+                for
+                <?= $investment->getDuration();
+                if ($investment->getDuration() > 1) : ?> years
+                <?php else : ?> year
+                <?php endif; ?>
+                under yearly rate of <?= $investment->getPercentage(); ?>%
+                you will get €<?= $investment->getTotal(); ?>!</h2>
+        <?php endif; ?>
     </div>
 </body>
 

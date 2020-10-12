@@ -10,13 +10,10 @@ class MyInvestment
     private float $total;
 
     public function __construct(
-        float $amount,
-        int $duration,
-        float $percentage
     ) {
-        $this->amount = $amount;
-        $this->duration = $duration;
-        $this->percentage = $percentage;
+        $this->amount = (float) $_POST['amount'];
+        $this->duration = (int) $_POST['duration'];
+        $this->percentage = (float) $_POST['percentage'];
     }
 
     public function getAmount(): float
