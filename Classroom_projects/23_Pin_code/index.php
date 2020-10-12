@@ -7,18 +7,7 @@ require_once 'PinManager.php';
 session_start();
 
 $pinManager = new PinManager();
-
-if (isset($_POST['button']) && strlen($_SESSION["pincode"]) < 4) {
-    if ($_SESSION["pincode"] !== "") {
-        $_SESSION["pincode"] .= "";
-    }
-
-    $_SESSION["pincode"] .= $_POST['button'];
-} else {
-    $_SESSION["pincode"] = "";
-}
-
-$splittedPin = str_split($_SESSION["pincode"]);
+$splittedPin = str_split($pinManager->fillPin($_POST['button'] ?? 'XXX'));
 
 ?>
 
