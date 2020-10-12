@@ -20,7 +20,7 @@ class PinManager
         }
     }
 
-    public function fillPin($pressedButton): string
+    public function fillPin(string $pressedButton): string
     {
         if (isset($pressedButton) && strlen($_SESSION["pincode"] ?? "") < 4) {
             if ($_SESSION["pincode"] !== "") {
