@@ -13,22 +13,24 @@ class TaskManager
         $this->loadTasks();
     }
 
-    public function saveTask(Task $task): void
+    public function displayTasks(): array
     {
-        fputcsv($this->tasklist, $task->toArray());
+        return $this->tasks;
     }
 
-    public function loadTasks(): array
+    public function saveTask(array $task): void
+    {
+        fputcsv($this->tasklist, (array) $task);
+    }
+
+    public function loadTasks(): void
     {
         while (!feof($this->tasklist)) {
             $taskData = (array) fgetcsv($this->tasklist);
 
             if (!empty($taskData[0])) {
-                $this->tasks[] = new Task(
-                    (string) $taskData[0]
-                );
+                $this->tasks[] = (string) $taskData[0];
             }
         }
-        return $this->tasks;
     }
 }

@@ -5,16 +5,12 @@
 
 declare(strict_types=1);
 
-require_once 'Task.php';
 require_once 'TaskManager.php';
 
-$taskField = $_POST["task"] ?? 'task';
-$task = new Task($taskField);
+$task = $_POST;
 
 $taskManager = new TaskManager();
 $taskManager->saveTask($task);
-
-
 
 ?>
 
@@ -45,8 +41,9 @@ $taskManager->saveTask($task);
 
     <div class="tasklist">
         <h2>Things to-do:</h2>
-        <pre>
-        <?= var_dump($taskManager->loadTasks()); ?>
+        <?php foreach($taskManager->displayTasks() as $id => $task) : ?>
+            <?= $id . ' - ' . $task ?><br>
+        <?php endforeach; ?>
     </div>
 </body>
 
