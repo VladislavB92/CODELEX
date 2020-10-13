@@ -7,10 +7,18 @@ declare(strict_types=1);
 
 require_once 'TaskManager.php';
 
-$task = $_POST;
-
 $taskManager = new TaskManager();
-$taskManager->saveTask($task);
+
+echo "<pre>";
+var_dump($taskManager->getTasks());
+echo "</pre>";
+
+$id = $_POST['delete'] ?? '0';
+
+$taskManager->saveTask($_POST['task'] ?? 'task', $id);
+
+
+
 
 ?>
 
@@ -21,7 +29,7 @@ $taskManager->saveTask($task);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To do list</title>
-    <link rel="stylesheet" href="styles.css">
+    <!-- <link rel="stylesheet" href="styles.css"> -->
 </head>
 
 <body>
@@ -41,8 +49,11 @@ $taskManager->saveTask($task);
 
     <div class="tasklist">
         <h2>Things to-do:</h2>
-        <?php foreach($taskManager->displayTasks() as $id => $task) : ?>
-            <?= $id . ' - ' . $task ?><br>
+        <?php foreach($taskManager->loadTasks() as $id => $task) : ?>
+            <?= $id . ' - ' . $task; ?> 
+            <form action="/" method="post">
+            <button type="submit" name="delete" value="<?= $task; ?>">X</button>
+        </form> <br>
         <?php endforeach; ?>
     </div>
 </body>
