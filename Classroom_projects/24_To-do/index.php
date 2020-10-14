@@ -13,9 +13,8 @@ echo "<pre>";
 var_dump($taskManager->getTasks());
 echo "</pre>";
 
-$id = $_POST['delete'] ?? '0';
 
-$taskManager->saveTask($_POST['task'] ?? 'task', $id);
+$taskManager->saveTask($_POST['id'] ?? 'id', $_POST['task'] ?? 'task');
 
 
 
@@ -52,7 +51,7 @@ $taskManager->saveTask($_POST['task'] ?? 'task', $id);
         <?php foreach($taskManager->loadTasks() as $id => $task) : ?>
             <?= $id . ' - ' . $task; ?> 
             <form action="/" method="post">
-            <button type="submit" name="delete" value="<?= $task; ?>">X</button>
+            <button type="submit" name="id" value="<?= $id; ?>">X</button>
         </form> <br>
         <?php endforeach; ?>
     </div>
