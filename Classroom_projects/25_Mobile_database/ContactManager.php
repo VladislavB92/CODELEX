@@ -5,26 +5,23 @@ declare(strict_types=1);
 class ContactManager
 {
     private $database;
-    private array $persons = [];
+    private array $contacts = [];
 
     public function __construct()
     {
-        $this->database = fopen('numbers.csv', 'rw+');
+        $this->database = fopen('contacts.csv', 'rw+');
         $this->loadContactCard();
     }
 
     public function searchByNumber(int $number)
     {
-        foreach ($this->persons as $person) {
-            if ($person->getNumber() === $number) {
-                return $person;
+        if (isset($number)) {
+            foreach ($this->contacts as $contactCard) {
+                if ($contactCard->getNumber() === $number) {
+                    return $contactCard;
+                }
             }
         }
-    }
-
-    public function saveData(ContactCard $contactCard): void
-    {
-        fputcsv($this->database, $contactCard->toArray());
     }
 
     private function loadContactCard(): void
@@ -33,10 +30,10 @@ class ContactManager
             $contactCard = (array) fgetcsv($this->database);
 
             if (!empty($contactCard[0])) {
-                $this->persons[] = new ContactCard(
+                $this->contacts[] = new ContactCard(
                     (string) $contactCard[0],
                     (string) $contactCard[1],
-                    (int) $contactCard[2],
+                    (int) $contactCard[2]
                 );
             }
         }

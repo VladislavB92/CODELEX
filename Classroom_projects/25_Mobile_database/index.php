@@ -5,12 +5,11 @@ declare(strict_types=1);
 require_once 'ContactCard.php';
 require_once 'ContactManager.php';
 
-$contact = new ContactCard();
-$contactManager = new ContactManager;
-$contactManager->saveData($contact);
+$contactManager = new ContactManager();
 
-$number = intval($_POST['number']) ?? 0;
-$foundedPerson = $contactManager->searchByNumber($number);
+$number = intval($_POST['number'] ?? 0);
+
+$contactCard = $contactManager->searchByNumber($number);
 
 ?>
 
@@ -33,12 +32,11 @@ $foundedPerson = $contactManager->searchByNumber($number);
         </form>
     </div>
     <div class="results">
-        <?php if ($foundedPerson !== null) : ?>
-            Name: <?= $foundedPerson->getName(); ?><br>
-            Surname: <?= $foundedPerson->getSurname(); ?><br>
-            Number: <?= $foundedPerson->getNumber(); ?><br>
+        <?php if ($contactCard !== null) : ?>
+            Name: <?= $contactCard->getName(); ?><br>
+            Surname: <?= $contactCard->getSurname(); ?><br>
         <?php else : ?>
-            <?= 'Phone number is not found' ?>
+            <?= 'Phone number is not found!'?>
         <?php endif; ?>
     </div>
 </body>

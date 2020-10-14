@@ -4,9 +4,19 @@ declare(strict_types=1);
 
 class ContactCard
 {
-    private string $name = 'name';
-    private string $surname = 'surname';
-    private int $number = 0;
+    private string $name;
+    private string $surname;
+    private int $number;
+
+    public function __construct(
+        string $name,
+        string $surname,
+        int $number
+    ) {
+        $this->name = $name;
+        $this->surname = $surname;
+        $this->number = $number;
+    }
 
     public function getName(): string
     {
