@@ -9,9 +9,9 @@ require_once 'TaskManager.php';
 
 $taskManager = new TaskManager();
 
-echo "<pre>";
-var_dump($taskManager->getTasks());
-echo "</pre>";
+//echo "<pre>";
+//var_dump($taskManager->getTasks());
+//echo "</pre>";
 
 ?>
 
