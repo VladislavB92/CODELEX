@@ -6,10 +6,8 @@ require_once 'ContactCard.php';
 require_once 'ContactManager.php';
 
 $contactManager = new ContactManager();
-
-$number = intval($_POST['number'] ?? 0);
-
-$contactCard = $contactManager->searchByNumber($number);
+$number = $_POST['number'] ?? 'Enter phone number';
+$contactCard = $contactManager->searchBy($number);
 
 ?>
 
@@ -22,7 +20,7 @@ $contactCard = $contactManager->searchByNumber($number);
 </head>
 
 <body>
-    <div class="contactSave">
+    <div class="findcontact">
         <h2>Find contact</h2>
         <form action="/" method="post">
             <label for="number">Phone number:</label>
@@ -32,11 +30,13 @@ $contactCard = $contactManager->searchByNumber($number);
         </form>
     </div>
     <div class="results">
-        <?php if ($contactCard !== null) : ?>
+        <?php if ($number === 'Enter phone number') : ?>
+            <?= $number; ?>
+        <?php elseif ($contactCard !== null) : ?>
             Name: <?= $contactCard->getName(); ?><br>
             Surname: <?= $contactCard->getSurname(); ?><br>
         <?php else : ?>
-            <?= 'Phone number is not found!'?>
+            <?= 'Phone number is not found' ?>
         <?php endif; ?>
     </div>
 </body>

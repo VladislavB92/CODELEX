@@ -13,13 +13,11 @@ class ContactManager
         $this->loadContactCard();
     }
 
-    public function searchByNumber(int $number)
+    public function searchBy(string $number)
     {
-        if (isset($number)) {
-            foreach ($this->contacts as $contactCard) {
-                if ($contactCard->getNumber() === $number) {
-                    return $contactCard;
-                }
+        foreach ($this->contacts as $contactCard) {
+            if ($contactCard->getNumber() === intval($number)) {
+                return $contactCard;
             }
         }
     }
