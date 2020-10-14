@@ -13,12 +13,6 @@ echo "<pre>";
 var_dump($taskManager->getTasks());
 echo "</pre>";
 
-
-$taskManager->saveTask($_POST['id'] ?? 'id', $_POST['task'] ?? 'task');
-
-
-
-
 ?>
 
 
@@ -48,7 +42,7 @@ $taskManager->saveTask($_POST['id'] ?? 'id', $_POST['task'] ?? 'task');
 
     <div class="tasklist">
         <h2>Things to-do:</h2>
-        <?php foreach($taskManager->loadTasks() as $id => $task) : ?>
+        <?php foreach($taskManager->getTasks() as $id => $task) : ?>
             <?= $id . ' - ' . $task; ?> 
             <form action="/" method="post">
             <button type="submit" name="id" value="<?= $id; ?>">X</button>
