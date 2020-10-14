@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 class TaskManager
 {
-    private $tasklist;
+    private $tasksfile;
     private array $tasks = [];
 
     // 1. Initializes object
@@ -12,7 +12,7 @@ class TaskManager
     // 3. Loads tasks from CSV
     public function __construct()
     {
-        $this->tasklist = fopen('tasks.csv', 'a+');
+        $this->tasksfile = fopen('tasks.csv', 'rw+');
         $this->loadTasks();
     }
 
@@ -24,8 +24,8 @@ class TaskManager
     private function loadTasks(): void
     {
         // 4. Loads all tasks
-        while (!feof($this->tasklist)) {
-            $taskData = (array) fgetcsv($this->tasklist);
+        while (!feof($this->tasksfile)) {
+            $taskData = (array) fgetcsv($this->tasksfile);
 
             if (!empty($taskData[0])) {
                 $this->tasks[] = (string) $taskData[0];
@@ -33,6 +33,8 @@ class TaskManager
         }
         $this->deleteTask();
         $this->addTask();
+
+        fputcsv($this->tasksfile, $this->tasks);
     }
 
     private function addTask(): void
