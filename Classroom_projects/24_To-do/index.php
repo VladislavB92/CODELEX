@@ -15,7 +15,6 @@ echo "</pre>";
 
 ?>
 
-
 <html lang="en">
 
 <head>
@@ -33,20 +32,20 @@ echo "</pre>";
     <div class="entryField">
         <form action="/" method="post">
             <label for="task">What to do?</label>
-            
+
             <input type="text" name="task"><br><br>
-            
+
             <button type="submit">Save</button><br>
         </form>
     </div>
 
     <div class="tasklist">
         <h2>Things to-do:</h2>
-        <?php foreach($taskManager->getTasks() as $id => $task) : ?>
-            <?= $id . ' - ' . $task; ?> 
+        <?php foreach ($taskManager->getTasks() as $id => $task) : ?>
+            <?= $id . ' - ' . $task; ?>
             <form action="/" method="post">
-            <button type="submit" name="id" value="<?= $id; ?>">X</button>
-        </form> <br>
+                <button type="submit" name="id" value="<?= $id; ?>">X</button>
+            </form> <br>
         <?php endforeach; ?>
     </div>
 </body>
