@@ -1,7 +1,6 @@
 <?php
 
 namespace App;
-use Ramsey\Uuid\Uuid as Uuid;
 
 class UUIDgiver
 {
