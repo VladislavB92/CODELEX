@@ -2,7 +2,12 @@
 
 declare(strict_types=1);
 
-var_dump($_POST['like'], $_POST['dislike']);
+require_once 'Picture.php';
+require_once 'RatingController.php';
+
+
+$picture = new Picture();
+
 
 ?>
 
@@ -18,14 +23,22 @@ var_dump($_POST['like'], $_POST['dislike']);
 <body>
     <div classs="pictures">
         <img src="images/bird.jpg" alt="Puffin">
+
         <form action="/" method="post">
-            <button type="submit" name="like">Like</button>
-        </form>
-        <form action="/" method="post">
-            <button type="submit" name="dislike">Dislike</button>
+
+            <input type="submit" name="rating" value="+1">
+
+            <input type="submit" name="rating" value="-1">
+
+            <?php if (isset($_POST['rating'])) : ?>
+
+                <?php $picture->saveLike($_POST['rating']); ?>
+
+                <?= "Rating: " . implode("", $picture->getTotalRating()); ?>
+
+            <?php endif; ?>
         </form>
     </div>
-
 </body>
 
 </html>
