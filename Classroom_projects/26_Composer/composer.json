@@ -1,10 +1,19 @@
 {
+    "name": "training/composer",
+    "description": "Training exercise for composer and autoload",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Vladislavs Buzinskis",
+            "email": "intelifoxgames@gmail.com"
+        }
+    ],
     "require": {
         "ramsey/uuid": "^4.1"
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "app"
         }
     }
 }
