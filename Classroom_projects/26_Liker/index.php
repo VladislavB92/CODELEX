@@ -22,9 +22,10 @@ $picture = new Picture();
         <h1>InstaFace</h1>
     </div>
     <div class="pictures">
-        <div class="image">
-            <img src="images/girl1.jpg" alt="Mirror girl">
-            <div class="buttons">
+
+        <div id="image1">
+            <img src="images/girl.jpeg" alt="Smiling girl">
+            <div id="buttons1">
                 <form action="/" method="post">
                     <input type="submit" name="rating" value="👎">
                     <input type="submit" name="rating" value="👍">

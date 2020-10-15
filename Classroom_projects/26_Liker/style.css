@@ -14,7 +14,7 @@
     height: 30%;
 }
 
-.image {
+#image1 {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -24,7 +24,7 @@
     height: 150px;
 }
 
-.image img {
+#image1 img {
     width: auto;
     max-width: 100%;
     max-height: 150px;
@@ -33,10 +33,11 @@
     display: block;
 }
 
-.buttons {
+#buttons1 {
     position: relative;
     width: 220px;
     padding: 20px;
     color: white;
     font-weight: bold;
 }
+
