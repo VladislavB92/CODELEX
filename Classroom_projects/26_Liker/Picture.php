@@ -18,16 +18,16 @@ class Picture
         return $likeCount;
     }
 
-    public function saveLike(string $likes = "0")
+    public function changeRating(string $points = "0")
     {
         $this->rating = explode(":", file_get_contents("likes.txt"));
 
-        if ($likes === '+1') {
-            $likes = 0;
-            $this->rating[$likes]++;
-        } elseif ($likes === '-1') {
-            $likes = 0;
-            $this->rating[$likes]--;
+        if ($points === '👍') {
+            $points = 0;
+            $this->rating[$points]++;
+        } elseif ($points === '👎') {
+            $points = 0;
+            $this->rating[$points]--;
         }
 
         file_put_contents("likes.txt", implode(":", $this->rating));

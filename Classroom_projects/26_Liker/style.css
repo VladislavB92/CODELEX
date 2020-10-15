@@ -1,22 +1,42 @@
-.pictures {
-    width: 80%;
-    height: 80%;
-    position: absolute;
-    margin: auto;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #aaa;
+.body, html {
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-img {
-    max-width: 50%;
-    max-height: 50%;
+.header {
+    background-color: 2d6187;
+    color: white;
+}
+
+.pictures {
+    position: relative;
+    background: #28abb9;
+    width: 100%;
+    height: 30%;
+}
+
+.image {
     position: absolute;
-    margin: auto;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #effad3;
+    width: 250px;
+    height: 150px;
+}
+
+.image img {
+    width: auto;
+    max-width: 100%;
+    max-height: 150px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+.buttons {
+    position: relative;
+    width: 220px;
+    padding: 20px;
+    color: white;
+    font-weight: bold;
 }

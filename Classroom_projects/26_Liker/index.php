@@ -3,11 +3,8 @@
 declare(strict_types=1);
 
 require_once 'Picture.php';
-require_once 'RatingController.php';
-
 
 $picture = new Picture();
-
 
 ?>
 
@@ -21,23 +18,27 @@ $picture = new Picture();
 </head>
 
 <body>
-    <div classs="pictures">
-        <img src="images/bird.jpg" alt="Puffin">
+    <div class="header">
+        <h1>InstaFace</h1>
+    </div>
+    <div class="pictures">
+        <div class="image">
+            <img src="images/girl1.jpg" alt="Mirror girl">
+            <div class="buttons">
+                <form action="/" method="post">
+                    <input type="submit" name="rating" value="👎">
+                    <input type="submit" name="rating" value="👍">
 
-        <form action="/" method="post">
+                    <?php if (isset($_POST['rating'])) : ?>
 
-            <input type="submit" name="rating" value="+1">
+                        <?php $picture->changeRating($_POST['rating']); ?>
 
-            <input type="submit" name="rating" value="-1">
+                        <?= implode("", $picture->getTotalRating()) . " people like that!"; ?>
 
-            <?php if (isset($_POST['rating'])) : ?>
-
-                <?php $picture->saveLike($_POST['rating']); ?>
-
-                <?= "Rating: " . implode("", $picture->getTotalRating()); ?>
-
-            <?php endif; ?>
-        </form>
+                    <?php endif; ?>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 
