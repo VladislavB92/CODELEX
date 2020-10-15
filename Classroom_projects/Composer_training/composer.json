@@ -1,0 +1,19 @@
+{
+    "name": "vlad/composer_training",
+    "description": "just raining",
+    "type": "project",
+    "require": {
+        "ramsey/uuid": "4.1.1"
+    },
+    "authors": [
+        {
+            "name": "Vladislavs Buzinskis",
+            "email": "intelifoxgames@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
