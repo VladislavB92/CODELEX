@@ -4,21 +4,15 @@ declare(strict_types=1);
 
 class Picture
 {
-    private string $name;
     private array $rating;
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function getTotalRating()
+    public function getTotalRating(): array
     {
         $likeCount = explode(":", file_get_contents("likes.txt"));
         return $likeCount;
     }
 
-    public function changeRating(string $points = "0")
+    public function changeRating(string $points = "0"): void
     {
         $this->rating = explode(":", file_get_contents("likes.txt"));
 
