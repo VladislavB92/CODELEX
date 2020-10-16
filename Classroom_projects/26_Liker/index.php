@@ -3,8 +3,9 @@
 declare(strict_types=1);
 
 require_once 'Picture.php';
+require_once 'RatingChanger.php';
 
-$picture = new Picture();
+$picture = new RatingChanger();
 
 ?>
 
@@ -32,7 +33,7 @@ $picture = new Picture();
 
                     <?php if (isset($_POST['rating'])) : ?>
 
-                        <?php $picture->changeRating($_POST['rating']); ?>
+                        <?php $picture->changeRating($_POST['rating'], new Picture("images/girl.jpeg")); ?>
 
                         <?= implode("", $picture->getTotalRating()) . " people like that!"; ?>
 

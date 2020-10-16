@@ -4,26 +4,36 @@ declare(strict_types=1);
 
 class Picture
 {
+    private string $pictureLink;
     private array $rating;
 
-    public function getTotalRating(): array
+    public function __construct(string $link)
     {
-        $likeCount = explode(":", file_get_contents("likes.txt"));
-        return $likeCount;
+        $this->pictureLink = $link;
     }
 
-    public function changeRating(string $points = "0"): void
+    public function getPictureLink(): string
     {
-        $this->rating = explode(":", file_get_contents("likes.txt"));
+        return $this->pictureLink;
+    }
 
-        if ($points === '👍') {
-            $points = 0;
-            $this->rating[$points]++;
-        } elseif ($points === '👎') {
-            $points = 0;
-            $this->rating[$points]--;
-        }
+    public function getRating(): array
+    {
+        return $this->rating;
+    }
 
-        file_put_contents("likes.txt", implode(":", $this->rating));
+    public function upRating($points): void
+    {
+        $this->rating[$points]++;
+    }
+
+    public function downRating($points): void
+    {
+        $this->rating[$points]--;
+    }
+
+    public function storeTotalRating($totalRating): void
+    {
+        $this->rating = $totalRating;
     }
 }
