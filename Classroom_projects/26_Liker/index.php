@@ -42,27 +42,7 @@ $picture = new Picture();
         </div>
 
     </div>
-    <div class="photo">
 
-        <div class="image">
-            <img src="images/girl1.jpg" alt="Mirror girl">
-            <div class="buttons">
-                <form action="/" method="post">
-                    <input type="submit" name="rating" value="👎">
-                    <input type="submit" name="rating" value="👍">
-
-                    <?php if (isset($_POST['rating'])) : ?>
-
-                        <?php $picture->changeRating($_POST['rating']); ?>
-
-                        <?= implode("", $picture->getTotalRating()) . " people like that!"; ?>
-
-                    <?php endif; ?>
-                </form>
-            </div>
-        </div>
-
-    </div>
 </body>
 
 </html>
