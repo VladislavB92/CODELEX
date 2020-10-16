@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 require_once 'Picture.php';
-require_once 'RatingChanger.php';
+require_once 'ImageProcessor.php';
 
-$picture = new RatingChanger();
+$picture = new ImageProcessor();
 
 ?>
 
@@ -25,25 +25,33 @@ $picture = new RatingChanger();
     <div class="photo">
 
         <div class="image">
-            <img src="images/girl.jpeg" alt="Smiling girl">
-            <div class="buttons">
+            
+        <?php foreach ($picture->getImageNames() as $key => $imageName) : ?>
+                <img src="<?= $imageName; ?>">
+
                 <form action="/" method="post">
-                    <input type="submit" name="rating" value="👎">
-                    <input type="submit" name="rating" value="👍">
+                    <input type="submit" name="<?= $key; ?>" value="👎">
+                    <input type="submit" name="<?= $key; ?>" value="👍">
 
-                    <?php if (isset($_POST['rating'])) : ?>
+                    <?php if (isset($_POST[$key])) : ?>
 
-                        <?php $picture->changeRating($_POST['rating'], new Picture("images/girl.jpeg")); ?>
-
-                        <?= implode("", $picture->getTotalRating()) . " people like that!"; ?>
-
+                        <?php $picture->changeRating($_POST[$key], new Picture($key, $imageName)); ?>
                     <?php endif; ?>
+
+                    <?= implode("", $picture->getTotalRating()) . " people like that!"; ?>
+              
                 </form>
+            <?php endforeach; ?>
+
+            <?= var_dump($_POST); ?>
+            <div class="buttons">
+
             </div>
         </div>
 
     </div>
 
+    <pre>
 </body>
 
 </html>
