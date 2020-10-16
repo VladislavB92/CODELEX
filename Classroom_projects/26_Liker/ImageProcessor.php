@@ -47,8 +47,5 @@ class ImageProcessor
                 $this->images[] = implode('', $line);
             }
         }
-        echo '<pre>';
-        var_dump($this->images);
-        echo '</pre>';
     }
 }

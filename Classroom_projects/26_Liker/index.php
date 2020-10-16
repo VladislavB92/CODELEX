@@ -20,38 +20,36 @@ $picture = new ImageProcessor();
 
 <body>
     <div class="header">
-        <h1>InstaFace</h1>
+        <h1>Lik'er!</h1>
     </div>
-    <div class="photo">
 
-        <div class="image">
-            
-        <?php foreach ($picture->getImageNames() as $key => $imageName) : ?>
+    <?php foreach ($picture->getImageNames() as $key => $imageName) : ?>
+
+        <div class="photo">
+            <div class="image">
+
                 <img src="<?= $imageName; ?>">
 
                 <form action="/" method="post">
-                    <input type="submit" name="<?= $key; ?>" value="👎">
-                    <input type="submit" name="<?= $key; ?>" value="👍">
+
+                    <div class="buttons">
+                        <input type="submit" name="<?= $key; ?>" value="👎">
+                        <input type="submit" name="<?= $key; ?>" value="👍">
+                        <?= implode("", $picture->getTotalRating()) . " people like that!"; ?>
+                    </div>
 
                     <?php if (isset($_POST[$key])) : ?>
-
                         <?php $picture->changeRating($_POST[$key], new Picture($key, $imageName)); ?>
+
                     <?php endif; ?>
-
-                    <?= implode("", $picture->getTotalRating()) . " people like that!"; ?>
-              
                 </form>
-            <?php endforeach; ?>
-
-            <?= var_dump($_POST); ?>
-            <div class="buttons">
 
             </div>
+
         </div>
 
-    </div>
+    <?php endforeach; ?>
 
-    <pre>
 </body>
 
 </html>
