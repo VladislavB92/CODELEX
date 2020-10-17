@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-class ImageProcessor
+class ImageController
 {
     private $photoStorage;
     private array $images;
@@ -10,9 +10,9 @@ class ImageProcessor
 
     public function __construct()
     {
-        $this->photoStorage = fopen('image_links.csv', 'a+');
+        $this->photoStorage = fopen('databases/image_links.csv', 'a+');
         $this->loadImages();
-        $this->csvStorage = fopen('csv_storage.csv', 'a+');
+        $this->csvStorage = fopen('databases/csv_storage.csv', 'a+');
     }
 
     public function getImageNames(): array
@@ -22,7 +22,7 @@ class ImageProcessor
 
     public function getTotalRating()
     {
-        $rows = array_map('str_getcsv', file('csv_storage.csv'));
+        $rows = array_map('str_getcsv', file('databases/csv_storage.csv'));
 
         $temp = [];
 
@@ -37,21 +37,21 @@ class ImageProcessor
         return $temp;
     }
 
-    public function changeRating(string $points = "0", Picture $picture): void
+    public function changeRating(string $points = '0', Picture $picture): void
     {
         if ($points === '❤️') {
 
-            $points = "0";
+            $points = '0';
             $picture->plusRating();
         } elseif ($points === '👎') {
 
-            $points = "0";
+            $points = '0';
             $picture->minusRating();
         }
 
-        $data = $picture->getId() . ":" . $picture->getRating();
+        $data = $picture->getId() . ':' . $picture->getRating();
 
-        $imageData = explode(":", $data);
+        $imageData = explode(':', $data);
 
         fputcsv($this->csvStorage, $imageData);
     }

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-require_once 'Picture.php';
-require_once 'ImageProcessor.php';
+require_once 'photo_engine/Picture.php';
+require_once 'photo_engine/ImageController.php';
 
-$picture = new ImageProcessor();
+$picture = new ImageController();
 
 if (isset($_POST)) {
     foreach ($_POST as $key => $rating) {
