@@ -6,7 +6,7 @@ class ImageController
 {
     private $photoStorage;
     private array $images;
-    private $csvStorage;
+    private $csvStorage; // resource type
 
     public function __construct()
     {
@@ -20,7 +20,7 @@ class ImageController
         return $this->images;
     }
 
-    public function getTotalRating()
+    public function getTotalRating(): array
     {
         $rows = array_map('str_getcsv', file('databases/csv_storage.csv'));
 
@@ -34,6 +34,7 @@ class ImageController
 
             $temp[$imageData[0]] += intval($imageData[1]);
         }
+        
         return $temp;
     }
 
@@ -56,7 +57,7 @@ class ImageController
         fputcsv($this->csvStorage, $imageData);
     }
 
-    public function loadImages()
+    public function loadImages(): void
     {
         while (!feof($this->photoStorage)) {
             $line = fgetcsv($this->photoStorage);
