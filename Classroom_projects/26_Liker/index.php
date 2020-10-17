@@ -7,6 +7,12 @@ require_once 'ImageProcessor.php';
 
 $picture = new ImageProcessor();
 
+if (isset($_POST)) {
+    foreach ($_POST as $key => $rating) {
+        $picture->changeRating($_POST[$key], new Picture($key, intval($rating)));
+    }
+}
+
 ?>
 
 <html lang="en">
@@ -27,25 +33,23 @@ $picture = new ImageProcessor();
 
         <div class="photo">
             <div class="image">
-
                 <img src="<?= $imageName; ?>">
-
                 <form action="/" method="post">
-
                     <div class="buttons">
+                        <input type="submit" name="<?= $key; ?>" value="❤️">
                         <input type="submit" name="<?= $key; ?>" value="👎">
-                        <input type="submit" name="<?= $key; ?>" value="👍">
-                        <?= implode("", $picture->getTotalRating()) . " people like that!"; ?>
+
+                        <?php foreach ($picture->getTotalRating() as $id => $rating) : ?>
+
+                            <?php if ($key == $id) : ?>
+                                <?= $rating . ' likes'; ?>
+                            <?php endif; ?>
+
+                        <?php endforeach; ?>
+
                     </div>
-
-                    <?php if (isset($_POST[$key])) : ?>
-                        <?php $picture->changeRating($_POST[$key], new Picture($key, $imageName)); ?>
-
-                    <?php endif; ?>
                 </form>
-
             </div>
-
         </div>
 
     <?php endforeach; ?>

@@ -6,11 +6,13 @@ class ImageProcessor
 {
     private $photoStorage;
     private array $images;
+    private $csvStorage;
 
     public function __construct()
     {
         $this->photoStorage = fopen('image_links.csv', 'a+');
         $this->loadImages();
+        $this->csvStorage = fopen('csv_storage.csv', 'a+');
     }
 
     public function getImageNames(): array
@@ -18,25 +20,40 @@ class ImageProcessor
         return $this->images;
     }
 
-    public function getTotalRating(): array
+    public function getTotalRating()
     {
-        $likeCount = explode(":", file_get_contents("points.txt"));
-        return $likeCount;
+        $rows = array_map('str_getcsv', file('csv_storage.csv'));
+
+        $temp = [];
+
+        foreach ($rows as $imageData) {
+
+            if (!array_key_exists($imageData[0], $temp)) {
+                $temp[$imageData[0]] = 0;
+            }
+
+            $temp[$imageData[0]] += intval($imageData[1]);
+        }
+        return $temp;
     }
 
     public function changeRating(string $points = "0", Picture $picture): void
     {
-        $picture->storeTotalRating(explode(":", file_get_contents("points.txt")));
+        if ($points === '❤️') {
 
-        if ($points === '👍') {
-            $points = 0;
-            $picture->plusRating($points);
+            $points = "0";
+            $picture->plusRating();
         } elseif ($points === '👎') {
-            $points = 0;
-            $picture->minusRating($points);
+
+            $points = "0";
+            $picture->minusRating();
         }
 
-        file_put_contents("points.txt", implode(":", $picture->getRating()));
+        $data = $picture->getId() . ":" . $picture->getRating();
+
+        $imageData = explode(":", $data);
+
+        fputcsv($this->csvStorage, $imageData);
     }
 
     public function loadImages()

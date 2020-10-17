@@ -5,13 +5,12 @@ declare(strict_types=1);
 class Picture
 {
     private int $id;
-    private string $pictureLink;
-    private array $rating;
+    private int $rating;
 
-    public function __construct(int $id, string $link)
+    public function __construct(int $id, int $rating)
     {
         $this->id = $id;
-        $this->pictureLink = $link;
+        $this->rating = $rating;
     }
 
     public function getId(): int
@@ -19,28 +18,18 @@ class Picture
         return $this->id;
     }
 
-    public function getPictureLink(): string
-    {
-        return $this->pictureLink;
-    }
-
-    public function getRating(): array
+    public function getRating(): int
     {
         return $this->rating;
     }
 
-    public function plusRating($points): void
+    public function plusRating(): void
     {
-        $this->rating[$points]++;
+        $this->rating++;
     }
 
-    public function minusRating($points): void
+    public function minusRating(): void
     {
-        $this->rating[$points]--;
-    }
-
-    public function storeTotalRating($totalRating): void
-    {
-        $this->rating = $totalRating;
+        $this->rating--;
     }
 }
