@@ -30,7 +30,7 @@ class PinManager
         return $this->userProfileCollection;
     }
 
-    public function verifyUser(string $pinCode)
+    public function verifyUser(string $pinCode): array
     {
         foreach ($this->userProfileCollection as $user) {
             if ($user->getPincode() === $pinCode) {
