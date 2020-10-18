@@ -34,7 +34,7 @@ $pinManager = new PinManager();
 
         <?php if (isset($_POST['pincode'])) : ?>
             <?php $pinManager->verifyUser($_POST['pincode']); ?>
-            <?= "Welcome back, " . key($_SESSION) . "!"; ?>
+            <?= "Welcome back, " . key($_SESSION) . "!"; ?> <br><br>
 
         <?php elseif (isset($_POST['logout'])) : ?>
             <?= "Bye!"; ?>
@@ -44,7 +44,7 @@ $pinManager = new PinManager();
         <?php endif; ?>
 
         <?php if (!empty($_SESSION)) : ?>
-            <?= "Active user: " . key($_SESSION); ?> <br><br>
+            <?= "Active user: " . key($_SESSION); ?> 
         <?php endif; ?>
     </div>
 
