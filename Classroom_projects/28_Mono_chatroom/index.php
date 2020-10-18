@@ -9,6 +9,7 @@ require_once 'chat_engine/ChatController.php';
 session_start();
 
 $pinManager = new PinManager();
+$chatControler = new ChatController();
 
 ?>
 
@@ -67,14 +68,13 @@ $pinManager = new PinManager();
             <button type="submit">Send</button>
         </form>
 
+
     </div>
 
     <div class="publicChat">
+        <h2>Latest messages:</h2>
+        <?= implode("<br><br>", $chatControler->displayChat()); ?><br>
 
-        <?php if (isset($_POST['message'])) : ?>
-            <?= key($_SESSION) . ": " . $_POST['message']; ?>
-        <?php endif; ?>
-        
     </div>
 
 </body>
