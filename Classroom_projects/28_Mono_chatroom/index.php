@@ -24,6 +24,17 @@ $chatControler = new ChatController();
 <body>
 
     <div class="header">
+
+        <?php if (!empty($_SESSION)) : ?>
+            <?= "Active user: " . $_SESSION['name']; ?>
+            <form action="/" method="POST">
+                <input type="hidden" name="logout" value="true" id="pincode">
+                <button type="submit">Log out</button>
+            </form>
+        <?php elseif (isset($_POST['logout'])) : ?>
+            <?= 'No user logged in'; ?>
+        <?php endif; ?>
+
         <h1>Chat room</h1>
     </div>
 
@@ -36,11 +47,6 @@ $chatControler = new ChatController();
             <button type="submit">Log in</button>
         </form>
 
-        <form action="/" method="POST">
-            <input type="hidden" name="logout" value="true" id="pincode">
-            <button type="submit">Log out</button>
-        </form>
-
         <?php if (isset($_POST['pincode'])) : ?>
             <?php $pinManager->verifyUser($_POST['pincode']); ?>
             <?= "Welcome back, " . $_SESSION['name'] . "!"; ?> <br><br>
@@ -50,10 +56,6 @@ $chatControler = new ChatController();
             <?php $_POST['logout'] = 'false'; ?>
             <?php $_SESSION = []; ?>
             <?php session_destroy(); ?>
-        <?php endif; ?>
-
-        <?php if (!empty($_SESSION)) : ?>
-            <?= "Active user: " . $_SESSION['name']; ?>
         <?php endif; ?>
 
     </div>
