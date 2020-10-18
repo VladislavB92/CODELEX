@@ -22,7 +22,8 @@ class PinManager
             if (!array_key_exists($userData[0], $this->userProfileCollection)) {
                 $this->userProfileCollection[] = new UserProfile(
                     $userData[0],
-                    $userData[1]
+                    $userData[1],
+                    $userData[2],
                 );
             }
         }
@@ -34,7 +35,9 @@ class PinManager
     {
         foreach ($this->userProfileCollection as $user) {
             if ($user->getPincode() === $pinCode) {
-                $_SESSION = [$user->getName() => $user->getPincode()];
+                $_SESSION['id'] = $user->getId();
+                $_SESSION['name'] = $user->getName();
+                $_SESSION['pincode'] = $user->getPincode();
 
                 return $_SESSION;
             }

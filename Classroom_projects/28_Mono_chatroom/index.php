@@ -43,7 +43,7 @@ $chatControler = new ChatController();
 
         <?php if (isset($_POST['pincode'])) : ?>
             <?php $pinManager->verifyUser($_POST['pincode']); ?>
-            <?= "Welcome back, " . key($_SESSION) . "!"; ?> <br><br>
+            <?= "Welcome back, " . $_SESSION['name'] . "!"; ?> <br><br>
 
         <?php elseif (isset($_POST['logout'])) : ?>
             <?= "Bye!"; ?>
@@ -53,7 +53,7 @@ $chatControler = new ChatController();
         <?php endif; ?>
 
         <?php if (!empty($_SESSION)) : ?>
-            <?= "Active user: " . key($_SESSION); ?>
+            <?= "Active user: " . $_SESSION['name']; ?>
         <?php endif; ?>
 
     </div>
@@ -67,7 +67,6 @@ $chatControler = new ChatController();
             <input type="text" name="message">
             <button type="submit">Send</button>
         </form>
-
 
     </div>
 
