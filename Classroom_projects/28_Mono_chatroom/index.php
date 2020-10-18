@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 require_once 'pin_engine/PinManager.php';
 require_once 'pin_engine/UserProfile.php';
+require_once 'chat_engine/ChatController.php';
 
 session_start();
 
@@ -16,18 +17,25 @@ $pinManager = new PinManager();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enter PIN</title>
+    <title>Chat room</title>
 </head>
 
 <body>
+
+    <div class="header">
+        <h1>Chat room</h1>
+    </div>
+
     <div class="entryField">
-        
-        <form action="/" method="post">
+
+        <h3>Enter your pincode</h3>
+
+        <form action="/" method="POST">
             <input type="text" name="pincode" id="pincode">
             <button type="submit">Log in</button>
         </form>
 
-        <form action="/" method="post">
+        <form action="/" method="POST">
             <input type="hidden" name="logout" value="true" id="pincode">
             <button type="submit">Log out</button>
         </form>
@@ -44,8 +52,29 @@ $pinManager = new PinManager();
         <?php endif; ?>
 
         <?php if (!empty($_SESSION)) : ?>
-            <?= "Active user: " . key($_SESSION); ?> 
+            <?= "Active user: " . key($_SESSION); ?>
         <?php endif; ?>
+
+    </div>
+
+    <div class="message">
+
+        <br>
+        <h3>Enter your message</h3>
+
+        <form action="/" method="post">
+            <input type="text" name="message">
+            <button type="submit">Send</button>
+        </form>
+
+    </div>
+
+    <div class="publicChat">
+
+        <?php if (isset($_POST['message'])) : ?>
+            <?= key($_SESSION) . ": " . $_POST['message']; ?>
+        <?php endif; ?>
+        
     </div>
 
 </body>

@@ -8,13 +8,13 @@ class PinManager
 
     public function __construct()
     {
-        $this->database = fopen('pincode.csv', 'a+');
+        $this->database = fopen('pin_engine/pincode.csv', 'a+');
         $this->loadUserProfiles();
     }
 
     private function loadUserProfiles(): array
     {
-        $rows = array_map('str_getcsv', file('pincode.csv'));
+        $rows = array_map('str_getcsv', file('pin_engine/pincode.csv'));
 
         $this->userProfileCollection = [];
 
@@ -30,7 +30,7 @@ class PinManager
         return $this->userProfileCollection;
     }
 
-    public function verifyUser(string $pinCode)
+    public function verifyUser(string $pinCode): array
     {
         foreach ($this->userProfileCollection as $user) {
             if ($user->getPincode() === $pinCode) {
