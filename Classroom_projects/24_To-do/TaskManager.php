@@ -4,52 +4,60 @@ declare(strict_types=1);
 
 class TaskManager
 {
-    private $tasksfile;
-    private array $tasks = [];
+    private array $currentTasks = [];
 
-    // 1. Initializes object
-    // 2. Opens CSV
-    // 3. Loads tasks from CSV
     public function __construct()
     {
-        $this->tasksfile = fopen('tasks.csv', 'rw+');
-        $this->loadTasks();
+        $this->addTask();
+        $this->removeTask();
     }
 
-    public function getTasks(): array
+    public function displayTasks(): array
     {
-        return $this->tasks;
-    }
+        $rows = array_map('str_getcsv', file('tasks.csv'));
 
-    private function loadTasks(): void
-    {
-        // 4. Loads all tasks
-        while (!feof($this->tasksfile)) {
-            $taskData = (array) fgetcsv($this->tasksfile);
-
-            if (!empty($taskData[0])) {
-                $this->tasks[] = (string) $taskData[0];
+        foreach ($rows as $task) {
+            if ($task[0] !== 0) {
+                $this->currentTasks[] = $task[0];
             }
         }
-        $this->deleteTask();
-        $this->addTask();
 
-        fputcsv($this->tasksfile, $this->tasks);
+        return $this->currentTasks;
     }
 
     private function addTask(): void
     {
         if (isset($_POST['task'])) {
-            $taskToAdd = $_POST['task'];
-            $this->tasks[] = $taskToAdd;
+            $task = $_POST['task'] . PHP_EOL;
+            file_put_contents('tasks.csv', $task, FILE_APPEND);
         }
     }
 
-    private function deleteTask(): void
+    public function removeTask(): void
     {
-        if (isset($_POST['id'])) {
-            $taskToDelete = intval($_POST['id']);
-            unset($this->tasks[$taskToDelete]);
+        $newTaskArray = [];
+
+        if (isset($_POST['delete'])) {
+
+            foreach ($this->displayTasks() as $id => $task) {
+                file_put_contents('tasks.csv', "");
+                if ($_POST['delete'] == $id) {
+
+                    $newTaskArray = array_splice(
+                        $this->currentTasks,
+                        intval($_POST['delete']),
+                        1,
+                        $id
+                    );
+
+                    file_put_contents('tasks.csv', $newTaskArray);
+                }
+            }
         }
+    }
+
+    public function eraseFile()
+    {
+        file_put_contents('tasks.csv', "");
     }
 }
