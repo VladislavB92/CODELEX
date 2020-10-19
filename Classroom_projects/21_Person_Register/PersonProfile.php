@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 class PersonProfile
 {
@@ -7,6 +8,18 @@ class PersonProfile
     private string $surname;
     private string $personCode;
     private string $address;
+
+    public function __construct(
+        string $name,
+        string $surname,
+        string $personCode,
+        string $address
+    ) {
+        $this->name = $name;
+        $this->surname = $surname;
+        $this->personCode = $personCode;
+        $this->address = $address;
+    }
 
     public function getName(): string
     {
@@ -28,31 +41,13 @@ class PersonProfile
         return $this->address;
     }
 
-    public function setName(string $name): void
+    public function toArray(): array
     {
-        $this->name = $name;
-    }
-
-    public function setSurname(string $surname): void
-    {
-        $this->surname = $surname;
-    }
-
-    public function setPersonCode(string $personCode): void
-    {
-        $this->personCode = $personCode;
-    }
-
-    public function setAddress(string $address): void
-    {
-        $this->address = $address;
-    }
-
-    public function saveData():void
-    {
-        $personArray = (array) $this;
-        $dataBase = fopen('PersonData.csv', 'a');
-        fputcsv($dataBase, $personArray);
-        fclose($dataBase);
+        return [
+            'Name' => $this->getName(),
+            'Surname' => $this->getSurname(),
+            'Personal code' => $this->getPersonCode(),
+            'Address' => $this->getAddress()
+        ];
     }
 }
