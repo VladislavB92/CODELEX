@@ -35,29 +35,28 @@ class TaskManager
 
     public function removeTask(): void
     {
+        $deletedTask = [];
         $newTaskArray = [];
 
         if (isset($_POST['delete'])) {
 
             foreach ($this->displayTasks() as $id => $task) {
-                file_put_contents('tasks.csv', "");
                 if ($_POST['delete'] == $id) {
 
-                    $newTaskArray = array_splice(
+                    $deletedTask = array_splice(
                         $this->currentTasks,
                         intval($_POST['delete']),
                         1,
                         $id
                     );
 
-                    file_put_contents('tasks.csv', $newTaskArray);
+                    $newTaskArray = array_diff($this->currentTasks, $deletedTask);
+                    $reindexed = array_values($newTaskArray);
+                    
+
+                    file_put_contents('Temp.csv', implode(PHP_EOL, $reindexed), FILE_APPEND);
                 }
             }
         }
-    }
-
-    public function eraseFile()
-    {
-        file_put_contents('tasks.csv', "");
     }
 }
