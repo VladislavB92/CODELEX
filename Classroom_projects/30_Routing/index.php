@@ -2,9 +2,13 @@
 
 require_once 'vendor/autoload.php';
 
-$dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
-    $r->addRoute('GET', '/articles', 'ArticlesController');
-    // {id} must be a number (\d+)
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    
+    $namespace = '\App\Controllers\\';
+    
+    $r->addRoute('GET', '/', $namespace . 'ArticlesController@index');
+    $r->addRoute('GET', '/articles', $namespace . 'ArticlesController@index');
+    $r->addRoute('GET', '/articles/{id}', $namespace . 'ArticlesController@show');
 });
 
 // Fetch method and URI from somewhere
@@ -15,24 +19,24 @@ $uri = $_SERVER['REQUEST_URI'];
 if (false !== $pos = strpos($uri, '?')) {
     $uri = substr($uri, 0, $pos);
 }
+
+// Decodes uri
 $uri = rawurldecode($uri);
 
 $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
 switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::NOT_FOUND:
-        echo "Page not found";
+        echo "404 PAGE NOT FOUND";
         break;
     case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
         $allowedMethods = $routeInfo[1];
-        // ... 405 Method Not Allowed
+        echo "METHOD NOT ALLOWED!";
         break;
     case FastRoute\Dispatcher::FOUND:
-        $handler = $routeInfo[1];
+        [$controller, $method] = explode("@", $routeInfo[1]);
         $vars = $routeInfo[2];
-        // ... call $handler with $vars
 
-        var_dump($handler);
+        (new $controller)->$method($vars);
+
         break;
 }
-
-#########################
