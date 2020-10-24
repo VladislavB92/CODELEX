@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 class Article
 {
     private string $title;
@@ -7,8 +9,8 @@ class Article
 
     public function __construct(string $title, string $content)
     {
-        $this->$title = $title;
-        $this->conten = $content;
+        $this->title = $title;
+        $this->content = $content;
     }
 
     public function getTitle(): string
