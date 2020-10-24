@@ -2,23 +2,20 @@
 
 declare(strict_types=1);
 
-class PersonProfile
+class ContactCard
 {
     private string $name;
     private string $surname;
-    private string $personCode;
-    private string $address;
+    private int $number;
 
     public function __construct(
         string $name,
         string $surname,
-        string $personCode,
-        string $address
+        int $number
     ) {
         $this->name = $name;
         $this->surname = $surname;
-        $this->personCode = $personCode;
-        $this->address = $address;
+        $this->number = $number;
     }
 
     public function getName(): string
@@ -31,14 +28,9 @@ class PersonProfile
         return $this->surname;
     }
 
-    public function getPersonCode(): string
+    public function getNumber(): int
     {
-        return $this->personCode;
-    }
-
-    public function getAddress(): string
-    {
-        return $this->address;
+        return $this->number;
     }
 
     public function toArray(): array
@@ -46,8 +38,7 @@ class PersonProfile
         return [
             'Name' => $this->getName(),
             'Surname' => $this->getSurname(),
-            'Personal code' => $this->getPersonCode(),
-            'Address' => $this->getAddress()
+            'Number' => $this->getNumber()
         ];
     }
 }
