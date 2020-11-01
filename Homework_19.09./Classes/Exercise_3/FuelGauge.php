@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 class FuelGauge
 {
-    private int $currentFuel; // litres
-
+    private $currentFuel; // litres
 
     public function __construct(int $maxFuel)
     {
