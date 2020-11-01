@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 class RatingFilter
 {
-    public static function getPG(array $movies)
+    public static function getPG(array $movies): array
     {
         $moviesWithPG = [];
 
