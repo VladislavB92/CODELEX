@@ -8,22 +8,17 @@ class SavingAccount
     private float $withdrawn = 0;
     private float $interestEarned = 0;
     private float $balance;
-    private float $endingBalance;
+    private float $monthlyInterestRate;
 
-    public function __construct(float $startingBalance)
+    public function __construct(float $startingBalance, float $annualInterestRate)
     {
         $this->balance = $startingBalance;
+        $this->monthlyInterestRate = $annualInterestRate / 12;
     }
 
     public function getBalance(): float
     {
         return $this->balance;
-    }
-
-    public function getEndingBalance(): float
-    {
-        $this->setEndingBalance();
-        return $this->endingBalance;
     }
 
     public function getDeposited(): float
@@ -36,7 +31,7 @@ class SavingAccount
         return abs($this->withdrawn);
     }
 
-    public function getEarnedInterest(): float
+    public function getInterestEarned(): float
     {
         return $this->interestEarned;
     }
@@ -51,13 +46,8 @@ class SavingAccount
         $this->deposited += $amount;
     }
 
-    public function addAnnualInterestRate(float $annualInterest)
+    public function saveInterest(): void
     {
-        $this->interestEarned = ((($annualInterest / 12) * $this->getBalance()));
-    }
-
-    public function setEndingBalance(): void
-    {
-        $this->endingBalance = $this->balance + $this->deposited - $this->withdrawn + $this->interestEarned;
+        $this->interestEarned += $this->monthlyInterestRate * $this->balance;
     }
 }
