@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require_once 'Video.php';
+
 class VideoStore
 {
     private array $inventory = [];
