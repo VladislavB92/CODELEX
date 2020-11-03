@@ -18,5 +18,4 @@ class FuelGauge extends Car2
     {
         $this->currentFuel = $this->currentFuel - 1 / 10;
     }
-
 }
