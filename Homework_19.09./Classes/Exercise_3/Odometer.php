@@ -2,17 +2,14 @@
 
 declare(strict_types=1);
 
-class Odometer
+class Odometer extends Car2
 {
-    private float $currentMileage = 0;
-    const MAX_MILEAGE = 999999;
-
     public function getCurrentMileage(): float
     {
         return $this->currentMileage;
     }
 
-    public function incrMileage(): void
+    public function increaseMileage(): void
     {
         if ($this->currentMileage < $this::MAX_MILEAGE) {
             $this->currentMileage++;
@@ -22,10 +19,4 @@ class Odometer
         }
     }
 
-    public function moveCar($fuel): void
-    {
-        if ($fuel > 0) {
-            $fuel--;
-        }
-    }
 }

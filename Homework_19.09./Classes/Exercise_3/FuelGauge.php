@@ -2,15 +2,8 @@
 
 declare(strict_types=1);
 
-class FuelGauge
+class FuelGauge extends Car2
 {
-    private float $currentFuel;
-
-    public function __construct(int $fuel)
-    {
-        $this->currentFuel = $fuel;
-    }
-
     public function getCurrentFuel(): float
     {
         return $this->currentFuel;
@@ -23,8 +16,7 @@ class FuelGauge
 
     public function burnFuel(): void
     {
-        if ($this->currentFuel > 0) {
-            $this->currentFuel--;
-        }
+        $this->currentFuel = $this->currentFuel - 1 / 10;
     }
+
 }
