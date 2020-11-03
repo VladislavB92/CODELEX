@@ -18,5 +18,4 @@ class Odometer extends Car2
             $this->currentMileage++;
         }
     }
-
 }
