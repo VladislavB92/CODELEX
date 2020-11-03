@@ -44,15 +44,11 @@ $increaseOdometer = $mileage->incrMileage();
 while ($fuel > 0) {
     $mileage->moveCar($fuel);
     $fuelgauge->burnFuel($increaseOdometer);
-    if ($fuel === 0){
+    if ($fuel === 0) {
         while ($fuel == 70)
-        $fuelgauge->fillCar();
+            $fuelgauge->fillCar();
     }
 
     $fuelgauge->reportCurrentFuel();
     $mileage->reportCurrentMileage();
-
-    
-
-
 }

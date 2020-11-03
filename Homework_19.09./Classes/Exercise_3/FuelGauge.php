@@ -29,6 +29,6 @@ class FuelGauge
 
     public function burnFuel(&$mileage): void
     {
-        $this->currentFuel -= (10/$mileage);
+        $this->currentFuel -= (10 / $mileage);
     }
 }

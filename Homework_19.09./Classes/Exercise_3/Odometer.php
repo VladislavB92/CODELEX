@@ -28,7 +28,7 @@ class Odometer
             $this->currentMileage++;
         } elseif ($this->currentMileage == $this::MAX_MILEAGE) {
             $this->currentMileage = 0;
-            $this->currentMileage ++;
+            $this->currentMileage++;
         }
     }
 
@@ -36,7 +36,6 @@ class Odometer
     {
         if ($fuel > 0) {
             $fuel--;
-            
         } elseif ($fuel === 0) {
             echo "\nNO FUEL! FILL CAR!\n";
         }
