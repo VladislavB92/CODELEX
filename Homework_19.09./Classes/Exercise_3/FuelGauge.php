@@ -4,31 +4,27 @@ declare(strict_types=1);
 
 class FuelGauge
 {
-    private $currentFuel; // litres
+    private float $currentFuel;
 
-    public function __construct(int $maxFuel)
+    public function __construct(int $fuel)
     {
-        $this->currentFuel = $maxFuel;
+        $this->currentFuel = $fuel;
     }
 
-    public function getCurrentFuel(): int
+    public function getCurrentFuel(): float
     {
         return $this->currentFuel;
-    }
-
-    public function reportCurrentFuel(): void
-    {
-        echo "Fuel level: " . $this->currentFuel . " litres\n";
     }
 
     public function fillCar(): void
     {
         $this->currentFuel++;
-        echo "Refueling: " . $this->currentFuel;
     }
 
-    public function burnFuel(&$mileage): void
+    public function burnFuel(): void
     {
-        $this->currentFuel -= (10 / $mileage);
+        if ($this->currentFuel > 0) {
+            $this->currentFuel--;
+        }
     }
 }

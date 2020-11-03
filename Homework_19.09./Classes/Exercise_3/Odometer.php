@@ -4,22 +4,12 @@ declare(strict_types=1);
 
 class Odometer
 {
-    private int $currentMileage; // km
+    private float $currentMileage = 0;
     const MAX_MILEAGE = 999999;
 
-    public function __construct(int $defaultMileage)
-    {
-        $this->currentMileage = $defaultMileage;
-    }
-
-    public function getCurrentMileage(): int
+    public function getCurrentMileage(): float
     {
         return $this->currentMileage;
-    }
-
-    public function reportCurrentMileage(): void
-    {
-        echo "Mileage: " . $this->currentMileage . " km\n";
     }
 
     public function incrMileage(): void
@@ -32,12 +22,10 @@ class Odometer
         }
     }
 
-    public function moveCar(&$fuel): void
+    public function moveCar($fuel): void
     {
         if ($fuel > 0) {
             $fuel--;
-        } elseif ($fuel === 0) {
-            echo "\nNO FUEL! FILL CAR!\n";
         }
     }
 }

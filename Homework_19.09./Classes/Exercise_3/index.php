@@ -33,22 +33,10 @@ and then run a loop that increments the odometer until the car runs out of fuel.
 During each loop iteration, print the car’s current mileage and amount of fuel. 
  */
 
-include 'FuelGauge.php';
-include 'Odometer.php';
+require_once 'FuelGauge.php';
+require_once 'Odometer.php';
 
 $fuelgauge = new FuelGauge(70);
 $mileage = new Odometer(0);
 $fuel = $fuelgauge->getCurrentFuel();
 $increaseOdometer = $mileage->incrMileage();
-
-while ($fuel > 0) {
-    $mileage->moveCar($fuel);
-    $fuelgauge->burnFuel($increaseOdometer);
-    if ($fuel === 0) {
-        while ($fuel == 70)
-            $fuelgauge->fillCar();
-    }
-
-    $fuelgauge->reportCurrentFuel();
-    $mileage->reportCurrentMileage();
-}
